@@ -1,0 +1,9 @@
+export const dimensionsGlobal = {
+    NAV_WIDTH: 240,
+    SWIPEABLE_WIDTH: 240,
+    NAV_WIDTH_COLLAPSED: 0,
+    APP_BAR_MOBILE: 64,
+    APP_BAR_DESKTOP: 92,
+    HEADER_MOBILE: 64,
+    HEADER_DESKTOP: 64,
+};
