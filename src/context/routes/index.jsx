@@ -6,7 +6,7 @@ export const RoutesContext = createContext(null);
 
 const RoutesProvider = ({ children }) => {
     const token = useSelector((state) => state.login.isAuthenticated);
-    const isAuthenticated = !!token
+    const isAuthenticated = true
     const [routes, setRoutes] = useState(generateRoutes(isAuthenticated));
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { CoreLayout } from "../../layout/core-layout";
-import { Home, Login } from "../../pages";
+import { Home, Login, Pagamentos } from "../../pages";
 
 export const generateRoutes = (isAuthenticated) => [
     {
@@ -12,6 +12,7 @@ export const generateRoutes = (isAuthenticated) => [
                 element: <Navigate to="/home" />,
             },
             { path: "home", name: "Home", element: <Home /> },
+            { path: "pagamentos", name: "Pagamentos", element: <Pagamentos /> },
         ],
     },
     {
