@@ -9,6 +9,9 @@ const PagamentosProvider = ({ children }) => {
     useEffect(() => {
         handleGetPayments()
         handleGetPaymentMethods()
+        // handleCreateProduct()
+        // handleCreateOrder()
+        // handleCreateInvoice()
     }, [])
 
 
@@ -34,6 +37,60 @@ const PagamentosProvider = ({ children }) => {
         const options = {
             url: `/payment_methods`,
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+        };
+        return await api(options)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {
+                console.error(error.response);
+            });
+    }
+
+    const handleCreateProduct = async () => {
+        const options = {
+            url: `/create_product`,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+        };
+        return await api(options)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {
+                console.error(error.response);
+            });
+    }
+
+    const handleCreateOrder = async () => {
+        const options = {
+            url: `/create_order`,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+        };
+        return await api(options)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {
+                console.error(error.response);
+            });
+    }
+
+    const handleCreateInvoice = async () => {
+        const options = {
+            url: `/create_invoice`,
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
