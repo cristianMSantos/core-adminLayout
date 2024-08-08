@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import { LayoutContext } from "../../../context/layout"
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { BreadCrumbs } from "../breadcrumbs";
 
 
 export const Header = () => {
@@ -36,7 +37,8 @@ export const Header = () => {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography
+                <BreadCrumbs />
+                {/* <Typography
                     component="h1"
                     variant="h6"
                     color="inherit"
@@ -44,7 +46,7 @@ export const Header = () => {
                     sx={{ flexGrow: 1 }}
                 >
                     Dashboard
-                </Typography>
+                </Typography> */}
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                         <NotificationsIcon />

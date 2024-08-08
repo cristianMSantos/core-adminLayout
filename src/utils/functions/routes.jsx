@@ -5,6 +5,7 @@ import { Home, Login, Pagamentos } from "../../pages";
 export const generateRoutes = (isAuthenticated) => [
     {
         path: "/",
+        name: "Home",
         element: isAuthenticated ? <CoreLayout /> : <Navigate to="/login" />,
         children: [
             {

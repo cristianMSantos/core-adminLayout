@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  app:
+    image: node:20
+    container_name: core-adminLayout
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+    command: sh -c "npm i && npm run dev -- --host"
+
+    # # Ajuste opcional para reiniciar sempre em caso de falha
+    # restart: always

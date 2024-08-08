@@ -35,4 +35,8 @@ import { createTheme } from "@mui/material";
 //     },
 // });
 
-export const defaultTheme = createTheme();
+export const defaultTheme = createTheme({
+    palette: {
+        mode: 'light'
+    }
+});
