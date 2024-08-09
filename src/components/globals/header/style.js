@@ -10,8 +10,8 @@ export const CustomAppBar = styled(AppBar, {
         duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
-        marginLeft: drawerwidth,
-        width: `calc(100% - ${drawerwidth}px)`,
+        // marginLeft: drawerwidth,
+        // width: `calc(100% - ${drawerwidth}px)`,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,

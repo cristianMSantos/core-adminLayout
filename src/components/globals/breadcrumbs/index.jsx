@@ -12,8 +12,15 @@ export const BreadCrumbs = () => {
 
     const breadcrumbNameMap = {};
 
-    routes?.map((e) => {
-        breadcrumbNameMap[e.path] = e.name;
+    routes?.map((route) => {
+        if(route.children){
+            route.children.map((item => {
+                if(item.path){
+                    breadcrumbNameMap[item.path] = item.name;
+                }
+            }))
+        }
+        // breadcrumbNameMap[route.path] = route.name;
     });
 
     return (
@@ -24,7 +31,7 @@ export const BreadCrumbs = () => {
                     <Typography
                         component="h1"
                         variant="h6"
-                        color={theme.palette.text.primary}
+                        color={'#fff'}
                         noWrap
                         sx={{ flexGrow: 1 }}
                         gutterBottom>
@@ -33,14 +40,15 @@ export const BreadCrumbs = () => {
                 ) : null}
                 {pathnames.map((value, index) => {
                     const last = index === pathnames.length - 1;
-                    const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+                    {/* const to = `/${pathnames.slice(0, index + 1).join("/")}`; */}
+                    const to = pathnames;
 
                     return last ? (
                         to !== '/home' ?
                             <Typography
                                 component="h1"
                                 variant="h6"
-                                color={theme.palette.text.primary}
+                                color={'#fff'}
                                 noWrap
                                 sx={{ flexGrow: 1 }}
                                 gutterBottom
@@ -51,7 +59,7 @@ export const BreadCrumbs = () => {
                             <Typography
                                 component="h1"
                                 variant="h6"
-                                color={theme.palette.text.primary}
+                                color={'#fff'}
                                 noWrap
                                 sx={{ flexGrow: 1 }}
                                 gutterBottom
@@ -63,7 +71,7 @@ export const BreadCrumbs = () => {
                         <Typography
                             component="h1"
                             variant="h6"
-                            color={theme.palette.text.primary}
+                            color={'#fff'}
                             noWrap
                             sx={{ flexGrow: 1 }}
                             gutterBottom

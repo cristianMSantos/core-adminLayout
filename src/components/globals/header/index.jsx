@@ -1,4 +1,4 @@
-import { Badge, IconButton, Toolbar, Typography } from "@mui/material"
+import { Badge, Box, IconButton, Toolbar, Typography } from "@mui/material"
 import { CustomAppBar } from "./style"
 import { useContext, useEffect, useState } from "react"
 import { LayoutContext } from "../../../context/layout"
@@ -17,10 +17,11 @@ export const Header = () => {
     return (
         <CustomAppBar
             drawerwidth={drawerWidth}
-            position={"absolute"}
+            position="fixed"
             open={open}
         >
             <Toolbar
+                variant="dense"
                 sx={{
                     pr: '24px', // keep right padding when drawer closed
                 }}
@@ -32,12 +33,13 @@ export const Header = () => {
                     onClick={toggleDrawer}
                     sx={{
                         marginRight: '36px',
-                        ...(open && { display: 'none' }),
+                        // ...(open && { display: 'none' }),
                     }}
                 >
                     <MenuIcon />
                 </IconButton>
                 <BreadCrumbs />
+                <Box sx={{ flexGrow: 1 }} />
                 {/* <Typography
                     component="h1"
                     variant="h6"

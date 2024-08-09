@@ -1,47 +1,63 @@
 import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import GroupsIcon from '@mui/icons-material/Groups';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import BusinessIcon from '@mui/icons-material/Business';
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import menus from './menus.json';
+import { MenuItem } from "./menuItem";
 
-export const mainListItems = (
-    <React.Fragment>
-        <ListItemButton>
-            <ListItemIcon>
-                <GroupsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Clientes" />
-        </ListItemButton>
-        <ListItemButton>
-            <ListItemIcon>
-                <CalendarMonthIcon />
-            </ListItemIcon>
-            <ListItemText primary="Agenda" />
-        </ListItemButton>
-        <ListItemButton>
-            <ListItemIcon>
-                <AttachMoneyIcon />
-            </ListItemIcon>
-            <ListItemText primary="Financeiro" />
-        </ListItemButton>
-        <ListItemButton>
-            <ListItemIcon>
-                <AssessmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Relatório" />
-        </ListItemButton>
-        <ListItemButton>
-            <ListItemIcon>
-                <BusinessIcon />
-            </ListItemIcon>
-            <ListItemText primary="Minha clínica" />
-        </ListItemButton>
-    </React.Fragment>
-);
+export const MainListItems = () => {
+    const [openMenu, setOpenMenu] = useState({
+        'clientes': false
+    });
+    const navigate = useNavigate()
+
+    const handleClick = (item, subItem) => {
+        if (subItem) {
+            console.log(subItem)
+            if (subItem.route) {
+                return navigate(subItem.route)
+            }
+        } else {
+            setOpenMenu((prevMenu) => {
+                const updateOpenMenu = { ...prevMenu }
+
+                Object.keys(updateOpenMenu).forEach((key) => {
+                    if (key !== item) {
+                        updateOpenMenu[key] = false;
+                    }
+                });
+                updateOpenMenu[item] = !prevMenu[item];
+
+                return updateOpenMenu
+            });
+
+            const menuItem = menus.arrayMenus?.find((menuItem) => menuItem.id === item);
+            if (menuItem && menuItem.route) {
+                return navigate(menuItem.route)
+            }
+        }
+    }
+
+
+
+    return (
+        menus && menus.arrayMenus.map((menu) => {
+            return (
+                <React.Fragment key={menu.section}>
+                    <MenuItem
+                        key={menu.id}
+                        onClick={handleClick}
+                        openMenu={openMenu}
+                        menuItem={menu}
+                        onClickSubItem={handleClick}
+                    />
+                </React.Fragment>
+            )
+        })
+    )
+}
+
+
 
 export const secondaryListItems = (
     <React.Fragment>
