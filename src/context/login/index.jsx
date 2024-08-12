@@ -1,6 +1,8 @@
 import React, { createContext } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setLogin } from "../../store/features/Login";
+import api from "../../axios";
 
 export const LoginContext = createContext(null);
 
@@ -8,12 +10,12 @@ const LoginProvider = ({ children }) => {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState({
         confirmPassword: false,
-        matricula: false,
+        email: false,
         senha: false
     });
     const [messageError, setMessageError] = React.useState({
         confirmPassword: null,
-        matricula: null,
+        email: null,
         senha: null
     });
 
@@ -42,15 +44,15 @@ const LoginProvider = ({ children }) => {
         const data = new FormData(event.currentTarget);
 
         const options = {
-            url: showResetPassword ? `/auth/reset` : `/auth/login`,
+            url: showResetPassword ? `/auth/reset` : `/authentication/login/`,
             method: 'POST',
             data: {
-                loginPassword: data.get('password'),
-                loginMatricula: data.get('matricula'),
+                de_nome_usuario: data.get('email'),
+                de_senha: data.get('password'),
             },
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
+            // headers: {
+            //     'Access-Control-Allow-Origin': '*'
+            // }
         }
 
         if (showResetPassword && document.getElementById('password').value === 'plansul123') {
@@ -59,7 +61,7 @@ const LoginProvider = ({ children }) => {
             return
         }
 
-        if (!Object.values(error).includes(true)) {
+        // if (!Object.values(error).includes(true)) {
             setLoading(true);
             return await api(options)
                 .then(async (response) => {
@@ -69,7 +71,7 @@ const LoginProvider = ({ children }) => {
                         setErrorLogin(false);
                         moveLogin()
                     } else {
-                        dispatch(setLogin(response.data.access_token))
+                        dispatch(setLogin(response.data.token))
                         setLoading(false);
                         setErrorLogin(false);
 
@@ -110,7 +112,7 @@ const LoginProvider = ({ children }) => {
                         }, 500);
                     }
                 })
-        }
+        // }
     };
 
     const handleRules = (event, field) => {
@@ -121,7 +123,7 @@ const LoginProvider = ({ children }) => {
             return
         }
 
-        if (field === 'matricula') {
+        if (field === 'email') {
             if (event && event.length < 6 || event && event.length > 6) {
                 setError({ ...error, [field]: true });
                 setMessageError({ ...messageError, [field]: 'Matrícula Inválida' });

@@ -13,14 +13,14 @@ export const generateRoutes = (isAuthenticated) => [
                 element: <Navigate to="/home" />,
             },
             { path: "home", name: "Home", element: <Home /> },
-            { path: "clientes", name: "Clientes", element: <Clientes /> },
+            { path: "/clientes", name: "Clientes", element: <Clientes /> },
 
-            { path: "/clientes/teste", name: "Minha Clínica", element: <MyClinica /> },
+            { path: "/clientes/teste", name: "Teste", element: <MyClinica /> },
 
-            { path: "agenda", name: "Agenda", element: <Agenda /> },
-            { path: "financeiro", name: "Financeiro", element: <Financeiro /> },
-            { path: "relatorio", name: "Relatório", element: <Relatorio /> },
-            { path: "myclinica", name: "Minha Clínica", element: <MyClinica /> }
+            { path: "/agenda", name: "Agenda", element: <Agenda /> },
+            { path: "/financeiro", name: "Financeiro", element: <Financeiro /> },
+            { path: "/relatorio", name: "Relatório", element: <Relatorio /> },
+            { path: "/myclinica", name: "Minha Clínica", element: <MyClinica /> }
             
             // { path: "pagamentos", name: "Pagamentos", element: <Pagamentos /> },
         ],

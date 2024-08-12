@@ -13,19 +13,23 @@ export const BreadCrumbs = () => {
     const breadcrumbNameMap = {};
 
     routes?.map((route) => {
-        if(route.children){
+        if (route.children) {
             route.children.map((item => {
-                if(item.path){
+                if (item.path) {
                     breadcrumbNameMap[item.path] = item.name;
                 }
             }))
         }
-        // breadcrumbNameMap[route.path] = route.name;
     });
+
+    // useEffect(() => {
+    //     console.log(pathnames)
+    //     console.log(breadcrumbNameMap['/clientes/teste'])
+    // }, [pathnames])
 
     return (
         <div role="presentation">
-            <Breadcrumbs aria-label="breadcrumb">
+            <Breadcrumbs separator={<span style={{ color: '#fff' }}> / </span>} aria-label="breadcrumb">
                 {pathnames.length <= 0 ? (
                     //   <Typography color="textPrimary">Home</Typography>
                     <Typography
@@ -33,15 +37,14 @@ export const BreadCrumbs = () => {
                         variant="h6"
                         color={'#fff'}
                         noWrap
-                        sx={{ flexGrow: 1 }}
                         gutterBottom>
                         Home
                     </Typography>
                 ) : null}
                 {pathnames.map((value, index) => {
                     const last = index === pathnames.length - 1;
-                    {/* const to = `/${pathnames.slice(0, index + 1).join("/")}`; */}
-                    const to = pathnames;
+                    const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+                    {/* const to = pathnames; */ }
 
                     return last ? (
                         to !== '/home' ?
@@ -50,7 +53,6 @@ export const BreadCrumbs = () => {
                                 variant="h6"
                                 color={'#fff'}
                                 noWrap
-                                sx={{ flexGrow: 1 }}
                                 gutterBottom
                                 key={to}>
                                 {breadcrumbNameMap[to]}
@@ -61,19 +63,18 @@ export const BreadCrumbs = () => {
                                 variant="h6"
                                 color={'#fff'}
                                 noWrap
-                                sx={{ flexGrow: 1 }}
                                 gutterBottom
                                 key={to}>
                                 Home
                             </Typography>
 
                     ) : (
+
                         <Typography
                             component="h1"
                             variant="h6"
                             color={'#fff'}
                             noWrap
-                            sx={{ flexGrow: 1 }}
                             gutterBottom
                             key={to}>
                             {breadcrumbNameMap[to]}

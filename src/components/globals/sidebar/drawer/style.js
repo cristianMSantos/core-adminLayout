@@ -19,7 +19,7 @@ export const CustomDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !
                 }),
                 width: theme.spacing(7),
                 [theme.breakpoints.up('sm')]: {
-                    width: theme.spacing(9),
+                    width: theme.spacing(8),
                 },
             }),
         },

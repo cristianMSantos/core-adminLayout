@@ -50,7 +50,7 @@ export const MenuItem = (
 
             {menuItem.hasSubItems && (
                 <Collapse in={openMenu?.[menuItem.id]} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
+                    <List component="div" disablePadding sx={{ paddingLeft: { xs: 'none', md: '15px' } }}>
                         {menuItem.subItems.map((subItem) => (
                             <ListItemButton
                                 key={subItem.id}

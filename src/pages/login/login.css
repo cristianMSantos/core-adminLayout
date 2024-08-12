@@ -14,7 +14,7 @@
     align-items: center;
     /* background: linear-gradient(180deg, rgba(34, 46, 64, 1) 0%, rgba(81, 195, 184, 1) 100%); */
     /* background: linear-gradient(180deg, rgba(34, 46, 64, 1) 0%, #022954 100%) */
-    background: linear-gradient(180deg, #060606, #2a5c93, #000f21);
+    /* background: linear-gradient(180deg, #060606, #2a5c93, #000f21); */
 }
 
 .grid-container {
@@ -62,12 +62,13 @@
 }
 
 .grid-login {
-    background: linear-gradient(42deg, rgba(42, 46, 54, 1) 0%, rgba(97, 107, 125, 1) 100%);
+    margin: 50px !important;
+    /* background: linear-gradient(42deg, rgba(42, 46, 54, 1) 0%, rgba(97, 107, 125, 1) 100%); */
 }
 
 .grid-slider {
     /* background: linear-gradient(0deg, rgba(62, 181, 169, 1) 0%, rgba(111, 226, 204, 1) 100%); */
-    background: linear-gradient(0deg, rgba(32, 127, 209, 1) 0%, #4fa7db 100%);
+    /* background: linear-gradient(0deg, rgba(32, 127, 209, 1) 0%, #4fa7db 100%); */
 }
 
 /* SLIDESHOW */
@@ -246,6 +247,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .errorLogin {

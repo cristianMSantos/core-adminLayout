@@ -26,7 +26,30 @@ export const Header = () => {
                     pr: '24px', // keep right padding when drawer closed
                 }}
             >
-                <IconButton
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'baseline'
+                }}>
+
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        // component="a"
+                        onClick={() => navigate('/home')}
+                        sx={{
+                            mr: 4,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        PSYCHOLOGY
+                    </Typography>
+
+                    {/* <IconButton
                     edge="start"
                     color="inherit"
                     aria-label="open drawer"
@@ -37,18 +60,10 @@ export const Header = () => {
                     }}
                 >
                     <MenuIcon />
-                </IconButton>
-                <BreadCrumbs />
+                </IconButton> */}
+                    <BreadCrumbs />
+                </Box>
                 <Box sx={{ flexGrow: 1 }} />
-                {/* <Typography
-                    component="h1"
-                    variant="h6"
-                    color="inherit"
-                    noWrap
-                    sx={{ flexGrow: 1 }}
-                >
-                    Dashboard
-                </Typography> */}
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                         <NotificationsIcon />

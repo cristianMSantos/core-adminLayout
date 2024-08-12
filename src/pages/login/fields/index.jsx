@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, InputAdornment, TextField, ThemeProvider, createTheme } from "@mui/material"
+import { Box, Grid, IconButton, InputAdornment, TextField, ThemeProvider, Typography, createTheme } from "@mui/material"
 import { useContext } from "react";
 import { LoginContext } from "../../../context/login";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -20,96 +20,108 @@ export const LoginContainer = () => {
 
     const LightTheme = createTheme({
         palette: {
-            mode: 'dark',
+            mode: 'light',
             primary: {
-                main: '#ffffff',
+                main: '#000',
             },
         },
     });
     return (
         <Box className="content">
-            <div className="wrap">
-                <Grid container className='grid-container'
-                    columns={{ xs: 4, sm: 12, md: 12 }}
-                    sx={{ height: '100%', width: '100%' }}
-                >
-                    <Grid item xs={6} sm={6} md={6} className='grid-slider'>
-                        <Box className='wfm-container'>
-                            <h1 className='wfm-h1'>LOGIN</h1>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={6} className="grid-login">
-                        <Box component="form" onSubmit={handleSubmit} className="box-login">
-                            <ThemeProvider theme={LightTheme}>
-                                <Grid container className="container-login" spacing={2}>
-                                    <Grid item xs={6} sm={6} md={6} className='form-inputs'>
+            <Grid container className='grid-container'
+                columns={{ xs: 4, sm: 12, md: 12 }}
+                sx={{ height: '100%', width: '100%', justifyContent: 'center' }}
+            >
+                <Grid item xs={12} sm={4} md={4} className="grid-login">
+                    <Box component="form" onSubmit={handleSubmit} className="box-login">
+                        <ThemeProvider theme={LightTheme}>
+                            <Grid container className="container-login">
+                                <Grid item xs={12} sm={12} md={12} className='form-inputs'>
+                                    <Box sx={{
+                                        'margin': '30px',
+                                        '& .MuiTextField-root': { mb: 2, width: '100%' },
+                                        '& .MuiLoadingButton-root': { mb: 2, width: '100%', backgroundColor: '#0D5710', color: 'white' },
+                                    }}>
                                         <Box sx={{
-                                            '& .MuiTextField-root': { mb: 2, width: '100%' },
-                                            '& .MuiLoadingButton-root': { mb: 2, width: '100%', backgroundColor: '#0D5710', color: 'white' },
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
                                         }}>
-                                            {/* <h3 className='login-title'>
-                                            <span>
-                                                Login
-                                            </span>
-                                        </h3> */}
-                                            <TextField
-                                                variant="standard"
-                                                error={error['matricula']}
-                                                helperText={messageError['matricula']}
-                                                onChange={(event) => handleRules(event.target.value, 'matricula')}
-                                                required
-                                                id="matricula"
-                                                name="matricula"
-                                                label="Matricula"
-                                                autoComplete="matricula"
-                                                InputProps={{
-                                                    readOnly: showResetPassword,
-                                                    style: {
-                                                        borderBottom: '2px solid rgba(0, 0, 0, 0.3)',
-                                                        opacity: '0.3',
-                                                    },
+                                            <img src="/images/Logo2.png" width={'100'} height={'100'}  />
+                                            <Typography
+                                                variant="h5"
+                                                noWrap
+                                                // component="a"
+                                                sx={{
+                                                    display: { xs: 'none', md: 'flex' },
+                                                    fontFamily: 'monospace',
+                                                    fontWeight: 700,
+                                                    letterSpacing: '.3rem',
+                                                    color: 'inherit',
+                                                    textDecoration: 'none',
                                                 }}
-
-                                            />
-                                            <TextField
-                                                variant="standard"
-                                                error={error['senha']}
-                                                helperText={messageError['senha']}
-                                                onChange={(event) => handleRules(event.target.value, 'senha')}
-                                                required
-                                                id="password"
-                                                name="password"
-                                                label="Senha"
-                                                type={showPassword ? 'text' : 'password'}
-                                                InputProps={{
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            <IconButton
-                                                                aria-label="toggle password visibility"
-                                                                onClick={handleClickShowPassword}
-                                                                onMouseDown={handleMouseDownPassword}
-                                                            >
-                                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                            </IconButton>
-                                                        </InputAdornment>
-                                                    ),
-                                                    style: {
-                                                        borderBottom: '2px solid rgba(0, 0, 0, 0.3)',
-                                                        opacity: '0.3',
-                                                    },
-                                                }}
-                                            />
-                                            <LoadingButton className='button-save' loading={loading} type="submit" variant="contained">
-                                                {showResetPassword ? 'Salvar' : 'Acessar'}
-                                            </LoadingButton>
+                                            >
+                                                PSYCHOLOGY
+                                            </Typography>
                                         </Box>
-                                    </Grid>
+                                        <TextField
+                                            variant="standard"
+                                            // error={error['email']}
+                                            // helperText={messageError['email']}
+                                            onChange={(event) => handleRules(event.target.value, 'email')}
+                                            required
+                                            id="email"
+                                            name="email"
+                                            label="Email:"
+                                            autoComplete="email"
+                                            InputProps={{
+                                                readOnly: showResetPassword,
+                                                style: {
+                                                    borderBottom: '2px solid rgba(0, 0, 0, 0.3)',
+                                                    opacity: '0.3',
+                                                },
+                                            }}
+
+                                        />
+                                        <TextField
+                                            variant="standard"
+                                            error={error['senha']}
+                                            helperText={messageError['senha']}
+                                            onChange={(event) => handleRules(event.target.value, 'senha')}
+                                            required
+                                            id="password"
+                                            name="password"
+                                            label="Senha:"
+                                            type={showPassword ? 'text' : 'password'}
+                                            InputProps={{
+                                                endAdornment: (
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                        >
+                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                ),
+                                                style: {
+                                                    borderBottom: '2px solid rgba(0, 0, 0, 0.3)',
+                                                    opacity: '0.3',
+                                                },
+                                            }}
+                                        />
+                                        <LoadingButton className='button-save' loading={loading} type="submit" variant="contained">
+                                            {showResetPassword ? 'Salvar' : 'Acessar'}
+                                        </LoadingButton>
+                                    </Box>
                                 </Grid>
-                            </ThemeProvider>
-                        </Box>
-                    </Grid>
+                            </Grid>
+                        </ThemeProvider>
+                    </Box>
                 </Grid>
-            </div>
+            </Grid>
         </Box>
     )
 }

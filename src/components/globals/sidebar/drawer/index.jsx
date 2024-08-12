@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CustomDrawer } from "./style"
 import { LayoutContext } from "../../../../context/layout"
 import { Box, Divider, IconButton, List, Toolbar, Typography } from "@mui/material"
@@ -13,11 +13,21 @@ export const Sidebar = () => {
         open
     } = useContext(LayoutContext)
     const navigate = useNavigate();
+    const [hoverDrawer, setHoverDrawer] = useState(false);
+
+    useEffect(() => {
+        console.log(hoverDrawer)
+    }, [hoverDrawer])
+
+
     return (
         <CustomDrawer
             variant="permanent"
-            open={open}
+            // open={open}
+            open={hoverDrawer}
             drawerwidth={drawerWidth}
+            onMouseEnter={() => setHoverDrawer(true)}  // Abrir o drawer ao passar o mouse
+            onMouseLeave={() => setHoverDrawer(false)}  // Fechar o drawer ao retirar o mouse
         >
             <Toolbar
                 variant="dense"
