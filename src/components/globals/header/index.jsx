@@ -11,13 +11,17 @@ export const Header = () => {
     const {
         toggleDrawer,
         drawerWidth,
-        open
+        open,
+        openDesktopDrawer,
+        isMobile
     } = useContext(LayoutContext)
+
 
     return (
         <CustomAppBar
             drawerwidth={drawerWidth}
             position="fixed"
+            ismobile={isMobile ? "true" : undefined}
             open={open}
         >
             <Toolbar
@@ -31,7 +35,7 @@ export const Header = () => {
                     alignItems: 'baseline'
                 }}>
 
-                    <Typography
+                    {/* <Typography
                         variant="h6"
                         noWrap
                         // component="a"
@@ -47,20 +51,23 @@ export const Header = () => {
                         }}
                     >
                         PSYCHOLOGY
-                    </Typography>
-
-                    {/* <IconButton
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={toggleDrawer}
-                    sx={{
-                        marginRight: '36px',
-                        // ...(open && { display: 'none' }),
-                    }}
-                >
-                    <MenuIcon />
-                </IconButton> */}
+                    </Typography> */}
+                    {
+                        (openDesktopDrawer.open || isMobile) && (
+                            <IconButton
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={toggleDrawer}
+                                sx={{
+                                    marginRight: '36px',
+                                    // ...(open && { display: 'none' }),
+                                }}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        )
+                    }
                     <BreadCrumbs />
                 </Box>
                 <Box sx={{ flexGrow: 1 }} />

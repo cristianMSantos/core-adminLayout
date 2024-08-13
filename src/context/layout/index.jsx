@@ -5,19 +5,47 @@ import { tema } from "../../constantes/colors";
 export const LayoutContext = createContext(null);
 
 const LayoutProvider = ({ children }) => {
-    const drawerWidth = 240;
+    const drawerWidth = 64;
+    const desktopDrawerWidth = 240;
+    const [isMobile, setIsMobile] = useState(
+        window.matchMedia("(max-width: 900px)").matches
+    );
 
+    useEffect(() => {
+        const handleWindowResize = () => {
+            setIsMobile(window.matchMedia("(max-width: 900px)").matches);
+        };
+
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, [])
+
+    const [openDesktopDrawer, setOpenDesktopDrawer] = useState(false);
     const [open, setOpen] = useState(true);
 
     const toggleDrawer = () => {
-        setOpen(!open);
+        if (isMobile) {
+            setOpen(!open);
+        } else {
+            setOpenDesktopDrawer(prev => ({
+                ...prev,
+                open: !prev.open
+            }))
+        }
     };
     return (
         <LayoutContext.Provider
             value={{
                 toggleDrawer,
                 drawerWidth,
-                open
+                desktopDrawerWidth,
+                open,
+                openDesktopDrawer,
+                setOpenDesktopDrawer,
+                isMobile
             }}
         >
             {children}

@@ -1,6 +1,7 @@
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Tooltip } from "@mui/material";
 import * as Icons from "@mui/icons-material";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LayoutContext } from "../../../../../context/layout";
 
 const IconComponent = ({ iconName }) => {
     const Icon = Icons[iconName];
@@ -23,32 +24,54 @@ export const MenuItem = (
         onClickSubItem
     }
 ) => {
+
+    const {
+        setOpenDesktopDrawer
+    } = useContext(LayoutContext)
+    const handleClick = (menu) => {
+        onClick(menu.id)
+        setOpenDesktopDrawer({
+            'id': menu.id,
+            'open': menu.hasSubItems
+        })
+    }
+
+    const {
+        isMobile
+    } = useContext(LayoutContext)
+
     return (
         <>
-            <ListItemButton onClick={() => onClick(menuItem.id)}>
-                <ListItemIcon>
-                    <IconComponent iconName={menuItem.icon} />
-                </ListItemIcon>
-                <ListItemText
-                    primary={menuItem.text}
-                />
-                {menuItem.hasSubItems &&
-                    (openMenu?.[menuItem.id] ? (
-                        <Icons.ExpandMore
-                            sx={{
-                                minWidth: 0,
-                            }}
-                        />
-                    ) : (
-                        <Icons.ChevronRight
-                            sx={{
-                                minWidth: 0,
-                            }}
-                        />
-                    ))}
-            </ListItemButton>
+            <Tooltip
+                title={menuItem.text}
+                placement="right-start"
+                arrow
+            >
+                <ListItemButton onClick={() => handleClick(menuItem)}>
+                    <ListItemIcon>
+                        <IconComponent iconName={menuItem.icon} />
+                    </ListItemIcon>
+                    <ListItemText
+                        primary={menuItem.text}
+                    />
+                    {menuItem.hasSubItems &&
+                        (openMenu?.[menuItem.id] ? (
+                            <Icons.ExpandMore
+                                sx={{
+                                    minWidth: 0,
+                                }}
+                            />
+                        ) : (
+                            <Icons.ChevronRight
+                                sx={{
+                                    minWidth: 0,
+                                }}
+                            />
+                        ))}
+                </ListItemButton>
+            </Tooltip>
 
-            {menuItem.hasSubItems && (
+            {menuItem.hasSubItems && isMobile && (
                 <Collapse in={openMenu?.[menuItem.id]} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding sx={{ paddingLeft: { xs: 'none', md: '15px' } }}>
                         {menuItem.subItems.map((subItem) => (
@@ -66,51 +89,6 @@ export const MenuItem = (
                     </List>
                 </Collapse>
             )}
-
-            {/* <div>
-
-                <ListItemButton onClick={() => handleRouteSelected('/clientes')}>
-                    <ListItemIcon>
-                        <GroupsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Clientes" />
-                    {openMenu ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={openMenu} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
-                            <ListItemIcon>
-                                <GroupsIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="TESTE" />
-                        </ListItemButton>
-                    </List>
-                </Collapse>
-                <ListItemButton onClick={() => handleRouteSelected('/agenda')}>
-                    <ListItemIcon>
-                        <CalendarMonthIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Agenda" />
-                </ListItemButton>
-                <ListItemButton onClick={() => handleRouteSelected('/financeiro')}>
-                    <ListItemIcon>
-                        <AttachMoneyIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Financeiro" />
-                </ListItemButton>
-                <ListItemButton onClick={() => handleRouteSelected('/relatorio')}>
-                    <ListItemIcon>
-                        <AssessmentIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Relatório" />
-                </ListItemButton>
-                <ListItemButton onClick={() => handleRouteSelected('/myclinica')}>
-                    <ListItemIcon>
-                        <BusinessIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Minha clínica" />
-                </ListItemButton>
-            </div> */}
         </>
     )
 }
