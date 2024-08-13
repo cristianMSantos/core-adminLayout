@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { CoreLayout } from "../../layout/core-layout";
-import { Home, Login, Pagamentos, Clientes, Agenda, Financeiro, Relatorio, MyClinica } from "../../pages";
+import { Home, Login,ModeloAnamnese, Clientes, Agenda, Financeiro, Relatorio, MyClinica } from "../../pages";
 
 export const generateRoutes = (isAuthenticated) => [
     {
@@ -20,6 +20,7 @@ export const generateRoutes = (isAuthenticated) => [
             { path: "/agenda", name: "Agenda", element: <Agenda /> },
             { path: "/financeiro", name: "Financeiro", element: <Financeiro /> },
             { path: "/relatorio", name: "Relatório", element: <Relatorio /> },
+            { path: "/configuracoes/modelos/anamnese", name: "Configurações", element: <ModeloAnamnese /> },
             { path: "/myclinica", name: "Minha Clínica", element: <MyClinica /> }
             
             // { path: "pagamentos", name: "Pagamentos", element: <Pagamentos /> },

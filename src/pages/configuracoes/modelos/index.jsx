@@ -1,0 +1,1 @@
+export {ModeloAnamnese} from "./anamnese";

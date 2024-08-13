@@ -1,12 +1,18 @@
-import React, { createContext } from "react";
-import { useDispatch } from "react-redux";
+import React, {createContext, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogin } from "../../store/features/Login";
 import api from "../../axios";
+import {setUser} from "../../store/features/User.js";
 
 export const LoginContext = createContext(null);
 
 const LoginProvider = ({ children }) => {
+
+    const isAuthenticated = useSelector((state) => state.login.isAuthenticated);
+
+
+
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState({
         confirmPassword: false,
@@ -71,16 +77,15 @@ const LoginProvider = ({ children }) => {
                         setErrorLogin(false);
                         moveLogin()
                     } else {
-                        dispatch(setLogin(response.data.token))
+                        await dispatch(setLogin(response.data.token));
                         setLoading(false);
                         setErrorLogin(false);
-
                         const options = {
-                            url: `/auth/me`,
-                            method: "POST",
+                            url: `/authentication/me/`,
+                            method: "GET",
                             headers: {
-                                "Access-Control-Allow-Origin": "*",
-                                Authorization: response.data.access_token ? `Bearer ${response.data.access_token}` : "",
+                                // "Access-Control-Allow-Origin": "*",
+                                Authorization: response.data.token ? `Bearer ${response.data.token}` : "",
                             },
                         };
                         await api(options)

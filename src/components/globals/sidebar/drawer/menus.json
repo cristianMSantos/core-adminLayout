@@ -48,6 +48,14 @@
             "route": "/myclinica",
             "section": "Minha clínica",
             "hasSubItems": false
+        },
+        {
+            "id": 31,
+            "text": "Configurações",
+            "icon": "Settings",
+            "route": "/configuracoes/modelos/anamnese",
+            "section": "Configurações",
+            "hasSubItems": false
         }
     ],
     "arrayRotas": [

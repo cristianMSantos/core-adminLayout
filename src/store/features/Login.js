@@ -9,6 +9,7 @@ export const login = createSlice({
         setLogin: (state, action) => {
             localStorage.setItem('token', action.payload);
             state.isAuthenticated = localStorage.getItem('token');
+
         }
     }
 });
