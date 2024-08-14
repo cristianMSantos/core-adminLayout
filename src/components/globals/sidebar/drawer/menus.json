@@ -10,10 +10,17 @@
             "subItems": [
                 {
                     "id": 19,
-                    "text": "SubCliente",
+                    "text": "Listagem",
                     "nivel": 4,
                     "icon": "Groups",
-                    "route": "/clientes/teste"
+                    "route": "/clientes/listagem"
+                },
+                {
+                    "id": 20,
+                    "text": "Cadastro",
+                    "nivel": 4,
+                    "icon": "Groups",
+                    "route": "/clientes/cadastro"
                 }
             ]
         },

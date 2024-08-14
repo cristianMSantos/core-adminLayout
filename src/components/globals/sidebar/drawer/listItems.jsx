@@ -25,6 +25,7 @@ export const MainListItems = () => {
     const navigate = useNavigate()
 
     const handleClick = (item, subItem) => {
+        console.log(menus.arrayMenus?.find((menuItem) => menuItem.id === item))
         if (subItem) {
             if (subItem.route) {
                 return navigate(subItem.route)
@@ -44,6 +45,7 @@ export const MainListItems = () => {
             });
 
             const menuItem = menus.arrayMenus?.find((menuItem) => menuItem.id === item);
+
             if (menuItem && menuItem.route) {
                 return navigate(menuItem.route)
             }
@@ -83,9 +85,6 @@ export const DesktopMenuList = () => {
         return navigate(subItem.route)
     }
 
-    useEffect(() => {
-        console.log(menuItem)
-    }, [menuItem])
     return (
         <React.Fragment>
             {/* <ListSubheader component="div" inset>
