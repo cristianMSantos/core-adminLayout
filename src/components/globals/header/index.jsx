@@ -3,6 +3,7 @@ import { CustomAppBar } from "./style"
 import { useContext, useEffect, useState } from "react"
 import { LayoutContext } from "../../../context/layout"
 import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { BreadCrumbs } from "../breadcrumbs";
 
@@ -53,7 +54,7 @@ export const Header = () => {
                         PSYCHOLOGY
                     </Typography> */}
                     {
-                        (openDesktopDrawer.open || isMobile) && (
+                        (openDesktopDrawer.hasSubItems || isMobile) && (
                             <IconButton
                                 edge="start"
                                 color="inherit"
@@ -64,7 +65,15 @@ export const Header = () => {
                                     // ...(open && { display: 'none' }),
                                 }}
                             >
-                                <MenuIcon />
+                                {
+                                    !isMobile ? (
+                                        openDesktopDrawer.open ? (
+                                            <MenuOpenIcon />
+                                        ) : (
+                                            <MenuOpenIcon sx={{ transform: 'rotate(180deg)' }} />
+                                        )
+                                    ) : <MenuIcon />
+                                }
                             </IconButton>
                         )
                     }

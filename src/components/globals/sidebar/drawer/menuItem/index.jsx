@@ -31,8 +31,9 @@ export const MenuItem = (
     const handleClick = (menu) => {
         onClick(menu.id)
         setOpenDesktopDrawer({
-            'id': menu.id,
-            'open': menu.hasSubItems
+            id: menu.id,
+            open: menu.hasSubItems,
+            hasSubItems: menu.hasSubItems
         })
     }
 

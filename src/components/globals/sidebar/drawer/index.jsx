@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import { CustomDrawer } from "./style"
 import { LayoutContext } from "../../../../context/layout"
-import { Box, Divider, Drawer, IconButton, List, Toolbar, Typography } from "@mui/material"
+import { Box, Button, Divider, Drawer, IconButton, List, Toolbar, Typography } from "@mui/material"
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { MainListItems, DesktopMenuList } from "./listItems";
 import { useNavigate } from "react-router-dom";
+import { grey } from '@mui/material/colors';
+import styled from "styled-components";
 
 export const Sidebar = () => {
     const {
@@ -13,10 +15,21 @@ export const Sidebar = () => {
         drawerWidth,
         open,
         openDesktopDrawer,
+        setOpenDesktopDrawer,
         isMobile
     } = useContext(LayoutContext)
     const navigate = useNavigate();
     const [hoverDrawer, setHoverDrawer] = useState(false);
+
+    const Puller = styled('div')(({ theme }) => ({
+        width: 6,
+        height: 30,
+        backgroundColor: grey[300],
+        borderRadius: 3,
+        position: 'absolute',
+        right: 8,
+    }));
+
 
     return (
         <>
@@ -83,29 +96,62 @@ export const Sidebar = () => {
                 </List>
             </Drawer>
             <CustomDrawer
+                anchor="left"
                 variant={
                     isMobile ? "temporary" : "permanent"
                 }
                 open={openDesktopDrawer.open}
+                hassubitems={openDesktopDrawer.hasSubItems ? "true" : undefined}
                 ismobile={isMobile ? "true" : undefined}
-                // open={hoverDrawer}
                 drawerwidth={desktopDrawerWidth}
+                onOpen={() => { }}
+                onClose={() => { }}
             >
-                <Toolbar
-                    variant="dense"
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        px: [1],
-                    }}
-                >
-                </Toolbar>
-                <Divider />
-                <List component="nav">
-                    <DesktopMenuList />
-                    {/* <Divider sx={{ my: 1 }} /> */}
-                </List>
+
+                <Box>
+                    <Toolbar
+                        variant="dense"
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                            px: [1],
+                        }}
+                    >
+                    </Toolbar>
+                    <Divider />
+                    <List component="nav">
+                        <DesktopMenuList />
+                        {/* <Divider sx={{ my: 1 }} /> */}
+                    </List>
+                </Box>
+                {
+                    !openDesktopDrawer.open && (
+                        <Box
+                            component="button"
+                            onClick={toggleDrawer}
+                            sx={{
+                                position: 'absolute',
+                                borderTopLeftRadius: 8,
+                                borderTopRightRadius: 8,
+                                visibility: 'visible',
+                                right: 0,
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                '&:hover': {
+                                    backgroundColor: '#b9d2f170',
+                                    border: 'transparent'
+                                },
+                            }}
+                        >
+                            <Puller />
+                        </Box>
+                    )
+                }
+
             </CustomDrawer>
         </>
     )

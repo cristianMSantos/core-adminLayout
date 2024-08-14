@@ -79,20 +79,20 @@ export const DesktopMenuList = () => {
 
     const menuItem = menus.arrayMenus?.find((menuItem) => menuItem.id === openDesktopDrawer.id)
 
-    useEffect(() => {
-        console.log(menuItem)
-    }, [menuItem])
-
     const onClickDeskopItem = (subItem) => {
         return navigate(subItem.route)
     }
+
+    useEffect(() => {
+        console.log(menuItem)
+    }, [menuItem])
     return (
         <React.Fragment>
             {/* <ListSubheader component="div" inset>
                 Saved reports
             </ListSubheader> */}
             <List component="div" disablePadding>
-                {menuItem && menuItem.hasSubItems && menuItem.subItems.map((subItem) => (
+                {menuItem && openDesktopDrawer.open && menuItem.hasSubItems && menuItem.subItems.map((subItem) => (
                     <ListItemButton
                         key={subItem.id}
                         onClick={() => onClickDeskopItem(subItem)}

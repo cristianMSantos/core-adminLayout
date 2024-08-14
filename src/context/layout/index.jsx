@@ -36,6 +36,11 @@ const LayoutProvider = ({ children }) => {
             }))
         }
     };
+
+    useEffect(() => {
+        console.log(openDesktopDrawer)
+    }, [openDesktopDrawer])
+
     return (
         <LayoutContext.Provider
             value={{
