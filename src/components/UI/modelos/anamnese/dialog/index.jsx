@@ -1,25 +1,114 @@
-import {Transition} from "../transition/index.jsx";
 import {
     Alert,
     AppBar,
     Box,
     Button,
     Dialog,
-    DialogContent, Fab,
-    IconButton, Stack,
+    DialogContent, DialogTitle,
+    Fab, FormControl, FormLabel,
+    IconButton, RadioGroup,
+    Stack,
     TextField,
-    Toolbar, Tooltip,
-    Typography
+    Toolbar,
+    Tooltip,
+    Typography,
+    FormControlLabel,
+    Radio, Grid
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close.js";
+import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from '@mui/icons-material/Add';
-import React from "react";
-import useCustomContext from "../../../../../context/useCustomContext/index.jsx";
-import {AnamneseContext} from "../../../../../context/index.js";
 import CheckIcon from '@mui/icons-material/Check';
-// eslint-disable-next-line react/prop-types
-export const AnamneseDialog = () =>{
-    const {openCreate,
+import React from "react";
+import useCustomContext from "../../../../../context/useCustomContext";
+import {AnamneseContext} from "../../../../../context";
+import {Transition} from "../transition";
+import * as PropTypes from "prop-types";
+import checkBoxIcon from "../../../../../assets/checkbox.svg";
+import textIcon from "../../../../../assets/textfield.svg";
+import selectIcon from "../../../../../assets/select.svg";
+const AlertInfo = ({children}) => (
+    <Alert severity="info" sx={{display: 'flex', alignItems: 'center'}}>
+        {children}
+    </Alert>
+);
+
+function DialogNewField(props) {
+    return <Dialog onClose={props.onClose} open={props.open}>
+        <DialogTitle sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <Typography>
+                Adicionar campo de questões
+            </Typography>
+            <IconButton onClick={props.onClose}><CloseIcon/></IconButton>
+        </DialogTitle>
+        <Alert severity="info"  sx={{marginTop: "1rem"}}>
+            Informe a questão
+        </Alert>
+        <DialogContent>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <TextField autoFocus={true} label={"Pergunta/Orientações"} name={"Pergunta/Orientações"} fullWidth/>
+                </Grid>
+                <Grid item xs={12}>
+                    <FormControl>
+                        <FormLabel id="demo-radio-buttons-group-label">Escolha o tipo de campo de resposta:</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue="female"
+                            name="radio-buttons-group"
+                        >
+                            <FormControlLabel value="text" control={<Radio />}
+                                              label={<div style={{display: "flex", alignItems: "center"}}>
+                                                  <img src={textIcon} alt={"checkbox icon"}
+                                                       style={{width: "1.5rem"}}/>
+                                                  <Typography>Campo de Texto Menor</Typography>
+                                              </div>}/>
+                            <FormControlLabel value="textMultiline" control={<Radio />}
+                                              label={<div style={{display: "flex", alignItems: "center"}}>
+                                                  <img src={textIcon} alt={"checkbox icon"}
+                                                       style={{width: "1.5rem"}}/>
+                                                  <Typography>Campo de Texto Maior</Typography>
+                                              </div>}/>
+                            <FormControlLabel value="selectBit" control={<Radio />}
+                                              label={<div style={{display: "flex", alignItems: "center"}}>
+                                                  <img src={selectIcon} alt={"checkbox icon"}
+                                                       style={{width: "1.5rem"}}/>
+                                                  <Typography>Selecionar apenas 1 item (sim e não)</Typography>
+                                              </div>}/>
+                            <FormControlLabel value="select" control={<Radio />}
+                                              label={<div style={{display: "flex", alignItems: "center"}}>
+                                                  <img src={selectIcon} alt={"checkbox icon"}
+                                                       style={{width: "1.5rem"}}/>
+                                                  <Typography>Selecionar apenas 1 item</Typography>
+                                              </div>}/>
+                            <FormControlLabel value="multiselect" control={<Radio/>} label={
+                                <div style={{display: "flex", alignItems: "center"}}>
+                                <img src={checkBoxIcon} alt={"checkbox icon"} style={{width:"1.5rem"}}/>
+                                    <Typography>Selecionar vários itens</Typography>
+                                </div>
+                            } />
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={8}></Grid>
+                        <Grid item xs={2}><Button onClick={props.onClose}>Fechar</Button></Grid>
+                        <Grid item xs={2}> <Button variant={"contained"}>Salvar</Button></Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </DialogContent>
+    </Dialog>;
+}
+
+DialogNewField.propTypes = {
+    onClose: PropTypes.func,
+    open: PropTypes.bool
+};
+export const AnamneseDialog = () => {
+    const {
+        openCreate,
         handleToggleDialog,
         grupo,
         handleGrupoChange,
@@ -35,82 +124,93 @@ export const AnamneseDialog = () =>{
         handleCriarNovoBloco,
         handleCancelarNewBloco
     } = useCustomContext(AnamneseContext);
-    return(
-        <Dialog onClose={handleToggleDialog} open={openCreate} fullScreen  TransitionComponent={Transition}>
-            <AppBar sx={{ position: 'relative' }}>
-                <Toolbar>
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        onClick={handleToggleDialog}
-                        aria-label="close"
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                    <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                        {!isGrupoSetted ? " Novo Grupo de Anamnese" : grupo}
-                    </Typography>
-                    <Button autoFocus color="inherit" onClick={()=>{}} disabled>
-                        Salvar
-                    </Button>
-                </Toolbar>
-            </AppBar>
-            {!isGrupoSetted && (
-                <Alert severity="info" sx={{
-                    display: 'flex',
-                    alignItems: 'center'
-                }}>
-                    <ul>
-                        <li>O grupo de anamnese é uma classificação do formulário que está criando. Preencha-o abaixo.</li>
-                        <li>Efetue o cadastro de um nome de grupo de anamnese para iniciar o processo de construção dos blocos e campos da mesma.</li>
-                    </ul>
-                </Alert>
-            )}
+
+    const isGroupNameEmpty = grupo === null || grupo === "";
+    const isBlockNameEmpty = newBloco === null || newBloco === "";
 
 
-                {!isGrupoSetted && (
+    const [openTeste, setOpenTeste] = React.useState(false);
+
+    const handleCloseTeste = () =>{
+        setOpenTeste(false);
+    }
+    return (
+        <>
+            <Dialog onClose={handleToggleDialog} open={openCreate} fullScreen TransitionComponent={Transition}>
+                <AppBar sx={{position: 'relative'}}>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" onClick={handleToggleDialog} aria-label="close">
+                            <CloseIcon/>
+                        </IconButton>
+                        <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
+                            {!isGrupoSetted ? " Novo Grupo de Anamnese" : grupo}
+                        </Typography>
+                        <Button autoFocus color="inherit" onClick={() => {
+                        }} disabled>
+                            Salvar
+                        </Button>
+                    </Toolbar>
+                </AppBar>
+                {!isGrupoSetted ? (
                     <>
-                    <DialogContent>
-                        <Box sx={{marginBottom:"1rem"}}>
-                            <Typography component="h4" sx={{fontSize:"1.25rem"}}>
-                                Novo Grupo de Anamnese
-                            </Typography>
-                            <Typography component="div" sx={{fontSize:"0.75rem"}}>
-                                Digite o nome do Grupo no campo abaixo e depois, clique em Continuar.
-                            </Typography>
-                        </Box>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Nome do Grupo de Anamnese"
-                            type="text"
-                            fullWidth
-                            value={grupo}
-                            onChange={handleGrupoChange}
-                        />
-                        <Box sx={{display:"flex", justifyContent:"flex-end", marginTop:"1rem"}}>
-                            <Button variant="contained" disabled={grupo === null || grupo === ""} onClick={handleSetGroup}>Continuar</Button>
-                        </Box>
-                    </DialogContent>
+                        <AlertInfo>
+                            <ul>
+                                <li>O grupo de anamnese é uma classificação do formulário que está criando. Preencha-o
+                                    abaixo.
+                                </li>
+                                <li>Efetue o cadastro de um nome de grupo de anamnese para iniciar o processo de
+                                    construção
+                                    dos blocos e campos da mesma.
+                                </li>
+                            </ul>
+                        </AlertInfo>
+                        <DialogContent>
+                            <Box sx={{marginBottom: "1rem"}}>
+                                <Typography component="h4" sx={{fontSize: "1.25rem"}}>
+                                    Novo Grupo de Anamnese
+                                </Typography>
+                                <Typography component="div" sx={{fontSize: "0.75rem"}}>
+                                    Digite o nome do Grupo no campo abaixo e depois, clique em Continuar.
+                                </Typography>
+                            </Box>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="group-name"
+                                label="Nome do Grupo de Anamnese"
+                                type="text"
+                                fullWidth
+                                value={grupo}
+                                onChange={handleGrupoChange}
+                            />
+                            <Box sx={{display: "flex", justifyContent: "flex-end", marginTop: "1rem"}}>
+                                <Button variant="contained" disabled={isGroupNameEmpty}
+                                        onClick={handleSetGroup}>Continuar</Button>
+                            </Box>
+                        </DialogContent>
                     </>
-                )}
-                {isGrupoSetted && (
+                ) : (
                     <>
                         {!iniciar && (
                             <>
-                                <Alert severity="info" sx={{
-                                    display: 'flex',
-                                    alignItems: 'center'
-                                }}>
+                                <AlertInfo>
                                     <Typography>Blocos da Anamnese</Typography>
-                                    <Typography sx={{fontSize:"0.75rem"}}>Os blocos da anamnese são compostos por um conjunto de perguntas que tem um mesmo tema em comum para facilitar o processo de preenchimento.</Typography>
-                                </Alert>
+                                    <Typography sx={{fontSize: "0.75rem"}}>
+                                        Os blocos da anamnese são compostos por um conjunto de perguntas que tem um
+                                        mesmo
+                                        tema em comum para facilitar o processo de preenchimento.
+                                    </Typography>
+                                </AlertInfo>
                                 <DialogContent>
-                                    <Box sx={{width:"100%", display:"flex", justifyContent:"center", marginTop:"1rem"}}>
+                                    <Box sx={{
+                                        width: "100%",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        marginTop: "1rem"
+                                    }}>
                                         <Tooltip title="Adicionar Bloco">
                                             <Fab color="primary" aria-label="add" onClick={handleIniciar}>
-                                                <AddIcon sx={{fontSize:"3rem"}} />
+                                                <AddIcon sx={{fontSize: "3rem"}}/>
                                             </Fab>
                                         </Tooltip>
                                     </Box>
@@ -118,71 +218,79 @@ export const AnamneseDialog = () =>{
                             </>
                         )}
                         {iniciar && (
-                           <>
-                               {bloco.lenght == 0 && (
-                                   <Alert
-                                       severity="info"
-                                       sx={{
-                                       display: 'flex',
-                                       alignItems: 'center'
-                                   }}
-                                   >
-                                       <Typography>Bloco é uma forma prática de organizar melhor o seu formulário de anamnese. Digite o nome do novo bloco abaixo e clique em salvar para adicioná-lo:</Typography>
-                                   </Alert>
-                               )}
-                               {!adicionarBloco && (
-                                   <Box sx={{width:"100%", display:"flex", justifyContent:"flex-end", marginTop:"1rem"}}>
-                                       <Button startIcon={<AddIcon/>} variant={"contained"} color={"primary"} onClick={handleCriarNovoBloco}>
+                            <>
+                                {bloco.length === 0 && (
+                                    <AlertInfo>
+                                        <Typography>
+                                            Bloco é uma forma prática de organizar melhor o seu formulário de anamnese.
+                                            Digite o nome do novo bloco abaixo e clique em salvar para adicioná-lo:
+                                        </Typography>
+                                    </AlertInfo>
+                                )}
+                                {!adicionarBloco && (
+                                    <Box sx={{
+                                        width: "100%",
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        marginTop: "1rem"
+                                    }}>
+                                        <Button startIcon={<AddIcon/>} variant="contained" color="primary"
+                                                onClick={handleCriarNovoBloco}>
                                             Adicionar Bloco
                                         </Button>
-                                   </Box>
-                               )}
-                           </>
-                        )}
-                        {
-                            bloco.map((item, index) => (
-                                <React.Fragment key={index}>
-                                    <Alert severity="success" color="warning" sx={{marginTop:"1rem"}}>
-                                        {item}
-                                    </Alert>
-                                </React.Fragment>
-                            ))
-                        }
-
-                        {adicionarBloco && (
-                            <>
-
-                                <DialogContent>
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="novoBloco"
-                                    label="Nome do novo Bloco"
-                                    type="text"
-                                    fullWidth
-                                    value={newBloco}
-                                    onChange={handleChangeNewBloco}
-                                />
-                                    <Box sx={{width:"100%", display:"flex", justifyContent:"center"}}>
-                                        <Stack spacing={2} direction="row">
-                                            <Button
-                                                disabled={newBloco === null || newBloco === ""}
-                                                variant={"contained"}
-                                                color={"primary"}
-                                                startIcon={<CheckIcon/>}
-                                                onClick={handleAddBloco}>Salvar Bloco</Button>
-                                            <Button variant={"outlined"} color={"error"} sx={{color:"gray", borderColor:"gray"}} onClick={handleCancelarNewBloco}>Cancelar</Button>
-                                        </Stack>
                                     </Box>
-                                </DialogContent>
+                                )}
+                                {bloco.map((item, index) => (
+                                    <React.Fragment key={index}>
+                                        <Alert severity="success" color="warning" sx={{marginTop: "1rem"}}>
+                                            {item.bloco}
+                                        </Alert>
+                                        <Box sx={{display: "flex", justifyContent: "flex-end", padding: "0.25rem"}}>
+                                            <Button onClick={() => {
+                                                setOpenTeste(true);
+                                            }}>Adicionar Questão</Button>
+                                        </Box>
+                                    </React.Fragment>
+                                ))}
+                                {adicionarBloco && (
+                                    <DialogContent>
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="new-block-name"
+                                            label="Nome do novo Bloco"
+                                            type="text"
+                                            fullWidth
+                                            value={newBloco}
+                                            onChange={handleChangeNewBloco}
+                                        />
+                                        <Box sx={{width: "100%", display: "flex", justifyContent: "center"}}>
+                                            <Stack spacing={2} direction="row">
+                                                <Button
+                                                    disabled={isBlockNameEmpty}
+                                                    variant="contained"
+                                                    color="primary"
+                                                    startIcon={<CheckIcon/>}
+                                                    onClick={handleAddBloco}
+                                                >
+                                                    Salvar Bloco
+                                                </Button>
+                                                <Button variant="outlined" color="error"
+                                                        sx={{color: "gray", borderColor: "gray"}}
+                                                        onClick={handleCancelarNewBloco}>
+                                                    Cancelar
+                                                </Button>
+                                            </Stack>
+                                        </Box>
+                                    </DialogContent>
+                                )}
                             </>
                         )}
                     </>
-
-
                 )}
+            </Dialog>
+            <DialogNewField onClose={handleCloseTeste} open={openTeste}/>
+        </>
 
-
-        </Dialog>
-    )
-}
+    );
+};

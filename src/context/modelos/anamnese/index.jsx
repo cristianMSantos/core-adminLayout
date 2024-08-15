@@ -43,7 +43,7 @@ const AnamneseProvider = ({ children }) => {
         setIsGrupoSetted(true);
     }
     const handleAddBloco = () =>{
-        setBloco([...bloco, newBloco]);
+        setBloco([...bloco, {bloco:newBloco, questoes:[]}]);
         setAdicionarBloco(false);
     }
     const handleIniciar = () =>{
