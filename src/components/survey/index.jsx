@@ -41,7 +41,7 @@ const clearOldLocalStorageEntries = (currentTitle) => {
 export function SurveyCreatorWidget() {
     const [surveyTitle, setSurveyTitle] = useState(defaultJson.title);
     const [creator, setCreator] = useState(null);
-
+    const [error, setError] = useState("");
     useEffect(() => {
         const storedJson = window.localStorage.getItem(`modelo-anamnese-${surveyTitle}`) || JSON.stringify(defaultJson);
         const creatorInstance = new SurveyCreator(creatorOptions);
@@ -51,31 +51,38 @@ export function SurveyCreatorWidget() {
             const surveyData = JSON.parse(creatorInstance.text);
             const newTitle = surveyData.title;
 
-            // Save to localStorage with new title
-            window.localStorage.setItem(`modelo-anamnese-${newTitle}`, creatorInstance.text);
+            if (newTitle !== defaultJson.title) {
+                setError(null);
+                window.localStorage.setItem(`modelo-anamnese-${newTitle}`, creatorInstance.text);
 
-            // Remove old localStorage key if title has changed
-            if (newTitle !== surveyTitle) {
-                window.localStorage.removeItem(`modelo-anamnese-${surveyTitle}`);
-                setSurveyTitle(newTitle);
+                // Remove old localStorage key if title has changed
+                if (newTitle !== surveyTitle) {
+                    window.localStorage.removeItem(`modelo-anamnese-${surveyTitle}`);
+                    setSurveyTitle(newTitle);
+                }
+
+                // Clear old local storage entries
+                clearOldLocalStorageEntries(newTitle);
+
+                // Send JSON to backend
+                try {
+                    const response = await api.post('/teste/', {
+                        grupo: newTitle,
+                        surveyData: surveyData
+                    });
+                    console.log('Survey data saved successfully', response.data);
+                    callback(saveNo, true); // Indicar sucesso para o Survey Creator
+                } catch (error) {
+                    console.error('Error saving survey data', error);
+                    callback(saveNo, false); // Indicar falha para o Survey Creator
+                }
+            } else {
+                setError("Por favor, altere o título do grupo.");
+                callback(saveNo, true);
             }
 
-            // Clear old local storage entries
-            clearOldLocalStorageEntries(newTitle);
+        }
 
-            // Send JSON to backend
-            try {
-                const response = await api.post('/teste/', {
-                    grupo: newTitle,
-                    surveyData: surveyData
-                });
-                console.log('Survey data saved successfully', response.data);
-                callback(saveNo, true); // Indicar sucesso para o Survey Creator
-            } catch (error) {
-                console.error('Error saving survey data', error);
-                callback(saveNo, false); // Indicar falha para o Survey Creator
-            }
-        };
 
         if (creatorInstance.survey) {
             // Atualiza o estado quando o survey é carregado ou editado
@@ -95,7 +102,7 @@ export function SurveyCreatorWidget() {
 
     return (
         <div>
-
+            {error && <p style={{color: 'red'}}>{error}</p>}
             {creator && (
                 <SurveyCreatorComponent creator={creator}/>
             )}
