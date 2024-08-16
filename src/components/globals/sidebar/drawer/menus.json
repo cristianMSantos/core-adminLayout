@@ -1,135 +1,144 @@
 {
-    "arrayMenus": [
+  "arrayMenus": [
+    {
+      "id": 3,
+      "text": "Clientes",
+      "icon": "Groups",
+      "route": "/clientes/listagem",
+      "section": "Clientes",
+      "hasSubItems": true,
+      "subItems": [
         {
-            "id": 3,
-            "text": "Clientes",
-            "icon": "Groups",
-            "route": "/clientes/listagem",
-            "section": "Clientes",
-            "hasSubItems": true,
-            "subItems": [
-                {
-                    "id": 19,
-                    "text": "Listagem",
-                    "nivel": 4,
-                    "icon": "Groups",
-                    "route": "/clientes/listagem"
-                },
-                {
-                    "id": 20,
-                    "text": "Cadastro",
-                    "nivel": 4,
-                    "icon": "Groups",
-                    "route": "/clientes/cadastro"
-                }
-            ]
+          "id": 19,
+          "text": "Listagem",
+          "nivel": 4,
+          "icon": "Groups",
+          "route": "/clientes/listagem"
         },
         {
-            "id": 27,
-            "text": "Agenda",
-            "icon": "CalendarMonth",
-            "route": "/agenda",
-            "section": "Agenda",
-            "hasSubItems": false
-        },
-        {
-            "id": 28,
-            "text": "Financeiro",
-            "icon": "AttachMoney",
-            "route": "/financeiro",
-            "section": "Financeiro",
-            "hasSubItems": false
-        },
-        {
-            "id": 29,
-            "text": "Relatório",
-            "icon": "Assessment",
-            "route": "/relatorio",
-            "section": "Relatório",
-            "hasSubItems": false
-        },
-        {
-            "id": 30,
-            "text": "Minha clínica",
-            "icon": "Business",
-            "route": "/myclinica",
-            "section": "Minha clínica",
-            "hasSubItems": false
-        },
-        {
-            "id": 31,
-            "text": "Configurações",
-            "icon": "Settings",
-            "route": "/configuracoes/modelos/anamnese",
-            "section": "Configurações",
-            "hasSubItems": false
+          "id": 20,
+          "text": "Cadastro",
+          "nivel": 4,
+          "icon": "Groups",
+          "route": "/clientes/cadastro"
         }
-    ],
-    "arrayRotas": [
-        "/dap/folhaponto",
-        "/dap/colaboradores",
-        "/dap/relatorios",
-        "/dap/ocorrencias",
-        "/trafego/escalas",
-        "/trafego/importacao",
-        "/seguranca/gestodemenus",
-        "/seguranca/perfis",
-        "/seguranca/acessos"
-    ],
-    "arrayPermissoes": [
+      ]
+    },
+    {
+      "id": 27,
+      "text": "Agenda",
+      "icon": "CalendarMonth",
+      "route": "/agenda",
+      "section": "Agenda",
+      "hasSubItems": false
+    },
+    {
+      "id": 28,
+      "text": "Financeiro",
+      "icon": "AttachMoney",
+      "route": "/financeiro",
+      "section": "Financeiro",
+      "hasSubItems": false
+    },
+    {
+      "id": 29,
+      "text": "Relatório",
+      "icon": "Assessment",
+      "route": "/relatorio",
+      "section": "Relatório",
+      "hasSubItems": false
+    },
+    {
+      "id": 30,
+      "text": "Minha clínica",
+      "icon": "Business",
+      "route": "/myclinica",
+      "section": "Minha clínica",
+      "hasSubItems": false
+    },
+    {
+      "id": 31,
+      "text": "Configurações",
+      "icon": "Settings",
+      "route": "/configuracoes/modelos/anamnese",
+      "section": "Configurações",
+      "hasSubItems": true,
+      "subItems": [
         {
-            "pagina": "Folha Ponto",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
-        },
-        {
-            "pagina": "Colaboradores",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
-        },
-        {
-            "pagina": "Relatórios",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
-        },
-        {
-            "pagina": "Ocorrências",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
-        },
-        {
-            "pagina": "Escalas",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
-        },
-        {
-            "pagina": "Importação",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
-        },
-        {
-            "pagina": "Gestão de Menus",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
-        },
-        {
-            "pagina": "Perfis",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
-        },
-        {
-            "pagina": "Acessos",
-            "visualizar": true,
-            "editar": true,
-            "excluir": true
+          "id": 50,
+          "text": "Anamnese",
+          "nivel": 4,
+          "icon": "Groups",
+          "route": "/configuracoes/modelos/anamnese"
         }
-    ]
+      ]
+    }
+  ],
+  "arrayRotas": [
+    "/dap/folhaponto",
+    "/dap/colaboradores",
+    "/dap/relatorios",
+    "/dap/ocorrencias",
+    "/trafego/escalas",
+    "/trafego/importacao",
+    "/seguranca/gestodemenus",
+    "/seguranca/perfis",
+    "/seguranca/acessos"
+  ],
+  "arrayPermissoes": [
+    {
+      "pagina": "Folha Ponto",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    },
+    {
+      "pagina": "Colaboradores",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    },
+    {
+      "pagina": "Relatórios",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    },
+    {
+      "pagina": "Ocorrências",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    },
+    {
+      "pagina": "Escalas",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    },
+    {
+      "pagina": "Importação",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    },
+    {
+      "pagina": "Gestão de Menus",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    },
+    {
+      "pagina": "Perfis",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    },
+    {
+      "pagina": "Acessos",
+      "visualizar": true,
+      "editar": true,
+      "excluir": true
+    }
+  ]
 }
