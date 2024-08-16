@@ -16,6 +16,7 @@ export const generateRoutes = (isAuthenticated) => [
             { path: "/clientes", name: "Clientes", element: <Clientes /> },
 
             { path: "/clientes/listagem", name: "Listagem", element: <MyClinica /> },
+            { path: "/clientes/cadastro", name: "Cadastro", element: <MyClinica /> },
 
             { path: "/agenda", name: "Agenda", element: <Agenda /> },
             { path: "/financeiro", name: "Financeiro", element: <Financeiro /> },

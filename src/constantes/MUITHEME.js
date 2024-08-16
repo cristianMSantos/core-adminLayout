@@ -38,5 +38,39 @@ import { createTheme } from "@mui/material";
 export const defaultTheme = createTheme({
     palette: {
         mode: 'light'
+    },
+    components: {
+        MuiListItemButton: {
+            styleOverrides: {
+                root: ({ theme }) => ({
+                    "&.Mui-selected": {
+                        backgroundColor: theme.palette.mode === 'light'
+                            ? 'rgb(25 118 210 / 21%)'
+                            : theme.palette.primary.main,
+                        color: theme.palette.primary.contrastText,
+                        '&:hover': {
+                            backgroundColor: theme.palette.mode === 'light'
+                                ? 'rgba(25, 118, 210, 0.3)' // um pouco mais escuro ao passar o mouse
+                                : theme.palette.primary.dark,
+                        },
+                        // Altera a cor do texto e do ícone quando selecionado
+                        '& .MuiListItemText-root': {
+                            color: theme.palette.mode === 'light'
+                                ? '#0d68c5'
+                                : theme.palette.primary.contrastText,
+
+                        },
+                        '& .MuiTypography-root': {
+                            fontWeight: 600
+                        },
+                        '& .MuiSvgIcon-root': {
+                            color: theme.palette.mode === 'light'
+                                ? '#0d68c5'
+                                : theme.palette.primary.contrastText,
+                        },
+                    },
+                }),
+            },
+        }
     }
 });

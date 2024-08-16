@@ -4,7 +4,7 @@
             "id": 3,
             "text": "Clientes",
             "icon": "Groups",
-            "route": null,
+            "route": "/clientes/listagem",
             "section": "Clientes",
             "hasSubItems": true,
             "subItems": [

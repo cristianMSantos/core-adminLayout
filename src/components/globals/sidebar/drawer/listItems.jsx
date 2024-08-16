@@ -25,7 +25,6 @@ export const MainListItems = () => {
     const navigate = useNavigate()
 
     const handleClick = (item, subItem) => {
-        console.log(menus.arrayMenus?.find((menuItem) => menuItem.id === item))
         if (subItem) {
             if (subItem.route) {
                 return navigate(subItem.route)
@@ -75,13 +74,20 @@ export const MainListItems = () => {
 
 export const DesktopMenuList = () => {
     const {
-        openDesktopDrawer
+        openDesktopDrawer,
+        setOpenDesktopDrawer
     } = useContext(LayoutContext)
     const navigate = useNavigate()
 
     const menuItem = menus.arrayMenus?.find((menuItem) => menuItem.id === openDesktopDrawer.id)
 
     const onClickDeskopItem = (subItem) => {
+
+        setOpenDesktopDrawer((prev) => ({
+            ...prev,
+            subId: subItem.id
+        }))
+
         return navigate(subItem.route)
     }
 
@@ -95,6 +101,7 @@ export const DesktopMenuList = () => {
                     <ListItemButton
                         key={subItem.id}
                         onClick={() => onClickDeskopItem(subItem)}
+                        selected={openDesktopDrawer.subId === subItem.id}
                     >
                         <IconComponent iconName={subItem.icon} />
                         <ListItemText

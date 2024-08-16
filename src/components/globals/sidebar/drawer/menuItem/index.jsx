@@ -26,14 +26,21 @@ export const MenuItem = (
 ) => {
 
     const {
-        setOpenDesktopDrawer
+        setOpenDesktopDrawer,
+        openDesktopDrawer
     } = useContext(LayoutContext)
     const handleClick = (menu) => {
         onClick(menu.id)
+
+        const subItem = menu.subItems?.find(sub => {
+            return sub.route === menu.route
+        })
+
         setOpenDesktopDrawer({
             id: menu.id,
             open: menu.hasSubItems,
-            hasSubItems: menu.hasSubItems
+            hasSubItems: menu.hasSubItems,
+            subId: subItem ? subItem.id : null
         })
     }
 
@@ -48,7 +55,7 @@ export const MenuItem = (
                 placement="right-start"
                 arrow
             >
-                <ListItemButton onClick={() => handleClick(menuItem)}>
+                <ListItemButton onClick={() => handleClick(menuItem)} selected={openDesktopDrawer.id === menuItem.id}>
                     <ListItemIcon>
                         <IconComponent iconName={menuItem.icon} />
                     </ListItemIcon>

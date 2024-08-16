@@ -8,6 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { grey } from '@mui/material/colors';
 import styled from "styled-components";
 
+const Puller = styled('div')(({ theme }) => ({
+    width: 6,
+    height: 30,
+    backgroundColor: grey[300],
+    borderRadius: 3,
+    position: 'absolute',
+    right: 8,
+}));
+
 export const Sidebar = () => {
     const {
         toggleDrawer,
@@ -20,16 +29,6 @@ export const Sidebar = () => {
     } = useContext(LayoutContext)
     const navigate = useNavigate();
     const [hoverDrawer, setHoverDrawer] = useState(false);
-
-    const Puller = styled('div')(({ theme }) => ({
-        width: 6,
-        height: 30,
-        backgroundColor: grey[300],
-        borderRadius: 3,
-        position: 'absolute',
-        right: 8,
-    }));
-
 
     return (
         <>
