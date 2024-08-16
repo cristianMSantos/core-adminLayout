@@ -4,16 +4,21 @@ import {
     Box,
     Button,
     Dialog,
-    DialogContent, DialogTitle,
-    Fab, FormControl, FormLabel,
-    IconButton, RadioGroup,
+    DialogContent,
+    DialogTitle,
+    Fab,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    Grid,
+    IconButton,
+    Radio,
+    RadioGroup,
     Stack,
     TextField,
     Toolbar,
     Tooltip,
-    Typography,
-    FormControlLabel,
-    Radio, Grid
+    Typography
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from '@mui/icons-material/Add';
@@ -26,6 +31,7 @@ import * as PropTypes from "prop-types";
 import checkBoxIcon from "../../../../../assets/checkbox.svg";
 import textIcon from "../../../../../assets/textfield.svg";
 import selectIcon from "../../../../../assets/select.svg";
+
 const AlertInfo = ({children}) => (
     <Alert severity="info" sx={{display: 'flex', alignItems: 'center'}}>
         {children}
@@ -33,6 +39,17 @@ const AlertInfo = ({children}) => (
 );
 
 function DialogNewField(props) {
+    const [campo, setCampo] = React.useState(null);
+    const [showOptions, setShowOptions] = React.useState(false);
+    const handleChangeTypeField = (event) => {
+        setCampo(event.target.value);
+
+        if (event.target.value === "select" || event.target.value === "multiselect") {
+            setShowOptions(true);
+        } else {
+            setShowOptions(false);
+        }
+    };
     return <Dialog onClose={props.onClose} open={props.open}>
         <DialogTitle sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <Typography>
@@ -40,7 +57,7 @@ function DialogNewField(props) {
             </Typography>
             <IconButton onClick={props.onClose}><CloseIcon/></IconButton>
         </DialogTitle>
-        <Alert severity="info"  sx={{marginTop: "1rem"}}>
+        <Alert severity="info" sx={{marginTop: "1rem"}}>
             Informe a questão
         </Alert>
         <DialogContent>
@@ -53,42 +70,54 @@ function DialogNewField(props) {
                         <FormLabel id="demo-radio-buttons-group-label">Escolha o tipo de campo de resposta:</FormLabel>
                         <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="female"
                             name="radio-buttons-group"
+                            value={campo}
+                            onChange={handleChangeTypeField}
                         >
-                            <FormControlLabel value="text" control={<Radio />}
+                            <FormControlLabel value="text" control={<Radio/>}
                                               label={<div style={{display: "flex", alignItems: "center"}}>
                                                   <img src={textIcon} alt={"checkbox icon"}
                                                        style={{width: "1.5rem"}}/>
                                                   <Typography>Campo de Texto Menor</Typography>
                                               </div>}/>
-                            <FormControlLabel value="textMultiline" control={<Radio />}
+                            <FormControlLabel value="textMultiline" control={<Radio/>}
                                               label={<div style={{display: "flex", alignItems: "center"}}>
                                                   <img src={textIcon} alt={"checkbox icon"}
                                                        style={{width: "1.5rem"}}/>
                                                   <Typography>Campo de Texto Maior</Typography>
                                               </div>}/>
-                            <FormControlLabel value="selectBit" control={<Radio />}
+                            <FormControlLabel value="selectBit" control={<Radio/>}
                                               label={<div style={{display: "flex", alignItems: "center"}}>
                                                   <img src={selectIcon} alt={"checkbox icon"}
                                                        style={{width: "1.5rem"}}/>
                                                   <Typography>Selecionar apenas 1 item (sim e não)</Typography>
                                               </div>}/>
-                            <FormControlLabel value="select" control={<Radio />}
+                            <FormControlLabel value="select" control={<Radio/>}
                                               label={<div style={{display: "flex", alignItems: "center"}}>
                                                   <img src={selectIcon} alt={"checkbox icon"}
                                                        style={{width: "1.5rem"}}/>
                                                   <Typography>Selecionar apenas 1 item</Typography>
                                               </div>}/>
+                            {/*a*/}
                             <FormControlLabel value="multiselect" control={<Radio/>} label={
                                 <div style={{display: "flex", alignItems: "center"}}>
-                                <img src={checkBoxIcon} alt={"checkbox icon"} style={{width:"1.5rem"}}/>
+                                    <img src={checkBoxIcon} alt={"checkbox icon"} style={{width: "1.5rem"}}/>
                                     <Typography>Selecionar vários itens</Typography>
                                 </div>
-                            } />
+                            }/>
                         </RadioGroup>
                     </FormControl>
                 </Grid>
+                {showOptions && (
+                    <>
+                        <Grid item xs={12}>
+                            <Alert severity="warning"> Informe as opções do campo</Alert>
+                        </Grid>
+                        <Grid item xs={12} sx={{display: "flex", justifyContent: "flex-end"}}>
+                            <Button variant={"contained"} color={"warning"}>Adicionar Opção</Button>
+                        </Grid>
+                    </>
+                )}
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={8}></Grid>
@@ -131,7 +160,7 @@ export const AnamneseDialog = () => {
 
     const [openTeste, setOpenTeste] = React.useState(false);
 
-    const handleCloseTeste = () =>{
+    const handleCloseTeste = () => {
         setOpenTeste(false);
     }
     return (
