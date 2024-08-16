@@ -10,6 +10,7 @@ import "survey-creator-core/i18n/portuguese";
 import api from "../../axios.js";
 
 import {editorLocalization} from "survey-creator-core";
+import {Alert} from "@mui/material";
 
 editorLocalization.currentLocale = "pt";
 
@@ -77,7 +78,7 @@ export function SurveyCreatorWidget() {
                     callback(saveNo, false); // Indicar falha para o Survey Creator
                 }
             } else {
-                setError("Por favor, altere o título do grupo.");
+                setError("Por favor, altere o Nome do grupo.");
                 callback(saveNo, true);
             }
 
@@ -102,7 +103,7 @@ export function SurveyCreatorWidget() {
 
     return (
         <div>
-            {error && <p style={{color: 'red'}}>{error}</p>}
+            {error && <Alert severity={"error"}>{error}</Alert>}
             {creator && (
                 <SurveyCreatorComponent creator={creator}/>
             )}
