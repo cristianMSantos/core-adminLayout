@@ -7,8 +7,9 @@ import { MainListItems, DesktopMenuList } from "./listItems";
 import { useNavigate } from "react-router-dom";
 import { grey } from '@mui/material/colors';
 import styled from "styled-components";
+import { useTheme } from "@emotion/react";
 
-const Puller = styled('div')(({ theme }) => ({
+const Puller = styled('div')(() => ({
     width: 6,
     height: 30,
     backgroundColor: grey[300],
@@ -29,6 +30,7 @@ export const Sidebar = () => {
     } = useContext(LayoutContext)
     const navigate = useNavigate();
     const [hoverDrawer, setHoverDrawer] = useState(false);
+    const theme = useTheme()
 
     return (
         <>
@@ -130,6 +132,9 @@ export const Sidebar = () => {
                             component="button"
                             onClick={toggleDrawer}
                             sx={{
+                                backgroundColor: theme.palette.mode === 'light'
+                                    ? '#fff'
+                                    : theme.palette.primary.dark,
                                 position: 'absolute',
                                 borderTopLeftRadius: 8,
                                 borderTopRightRadius: 8,

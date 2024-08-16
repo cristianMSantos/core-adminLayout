@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import api from "../../axios";
 
 export const login = createSlice({
     name: 'login',
@@ -10,9 +11,15 @@ export const login = createSlice({
             localStorage.setItem('token', action.payload);
             state.isAuthenticated = localStorage.getItem('token');
 
+        },
+        setLogout: (state) => {
+            state.user = null
+            delete api.defaults.headers.common['Authorization']
+            localStorage.removeItem('token')
+            state.isAuthenticated = localStorage.getItem('token')
         }
     }
 });
 
-export const { setLogin } = login.actions;
+export const { setLogin, setLogout } = login.actions;
 export default login.reducer;

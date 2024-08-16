@@ -5,6 +5,6 @@ import userReducer from "./features/User";
 export default configureStore({
     reducer: {
         login: loginReducer,
-        user:userReducer
+        user: userReducer
     },
 });

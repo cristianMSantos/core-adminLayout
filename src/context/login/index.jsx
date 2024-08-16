@@ -1,9 +1,9 @@
-import React, {createContext, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { createContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogin } from "../../store/features/Login";
 import api from "../../axios";
-import {setUser} from "../../store/features/User.js";
+import { setUser } from "../../store/features/User.js";
 
 export const LoginContext = createContext(null);
 
@@ -68,55 +68,55 @@ const LoginProvider = ({ children }) => {
         }
 
         // if (!Object.values(error).includes(true)) {
-            setLoading(true);
-            return await api(options)
-                .then(async (response) => {
-                    if (showResetPassword) {
-                        setShowResetPassword(false)
-                        setLoading(false);
-                        setErrorLogin(false);
-                        moveLogin()
-                    } else {
-                        await dispatch(setLogin(response.data.token));
-                        setLoading(false);
-                        setErrorLogin(false);
-                        const options = {
-                            url: `/authentication/me/`,
-                            method: "GET",
-                            headers: {
-                                // "Access-Control-Allow-Origin": "*",
-                                Authorization: response.data.token ? `Bearer ${response.data.token}` : "",
-                            },
-                        };
-                        await api(options)
-                            .then((response) => {
-                                dispatch(setUser(response.data));
-
-                            })
-                            .catch((error) => {
-                                console.error("Erro ao buscar o usuário:", error.response);
-                            });
-                        navigate('/');
+        setLoading(true);
+        return await api(options)
+            .then(async (response) => {
+                if (showResetPassword) {
+                    setShowResetPassword(false)
+                    setLoading(false);
+                    setErrorLogin(false);
+                    moveLogin()
+                } else {
+                    await dispatch(setLogin(response.data.token));
+                    setLoading(false);
+                    setErrorLogin(false);
+                    const options = {
+                        url: `/authentication/me/`,
+                        method: "GET",
+                        headers: {
+                            // "Access-Control-Allow-Origin": "*",
+                            Authorization: response.data.token ? `Bearer ${response.data.token}` : "",
+                        },
                     };
+                    await api(options)
+                        .then((response) => {
+                            dispatch(setUser(response.data));
+
+                        })
+                        .catch((error) => {
+                            console.error("Erro ao buscar o usuário:", error.response);
+                        });
+                    navigate('/');
+                };
 
 
-                })
-                .catch((error) => {
-                    if (error.response.status === 401) {
+            })
+            .catch((error) => {
+                if (error.response.status === 401) {
+                    setLoading(false);
+                    setErrorLogin(true);
+                }
+
+                if (error.response.status === 403 && error.response.data.error === 'Reset Password') {
+                    moveLogin()
+
+                    //delay para mostrar as mudanças após a animação
+                    setTimeout(() => {
+                        setShowResetPassword(true)
                         setLoading(false);
-                        setErrorLogin(true);
-                    }
-
-                    if (error.response.status === 403 && error.response.data.error === 'Reset Password') {
-                        moveLogin()
-
-                        //delay para mostrar as mudanças após a animação
-                        setTimeout(() => {
-                            setShowResetPassword(true)
-                            setLoading(false);
-                        }, 500);
-                    }
-                })
+                    }, 500);
+                }
+            })
         // }
     };
 
