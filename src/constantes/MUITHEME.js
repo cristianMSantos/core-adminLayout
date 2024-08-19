@@ -103,6 +103,18 @@ export const defaultTheme = createTheme({
                     },
                 }),
             },
+        },
+        MuiTab: {
+            styleOverrides: {
+                root: ({ theme }) => ({
+                    '&:focus': {
+                        outline: 'none',
+                    },
+                    '&:focus-visible': {
+                        outline: 'none',
+                    },
+                })
+            }
         }
     }
 });

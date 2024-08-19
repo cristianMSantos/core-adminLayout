@@ -1,5 +1,5 @@
 import useCustomContext from "../../../../../context/useCustomContext/index.jsx";
-import {AnamneseContext} from "../../../../../context/index.js";
+import {AnamneseContext} from "../../../../../context/index.jsx";
 import {Transition} from "../transition/index.jsx";
 import {Dialog} from "@mui/material";
 import {AnamneseAppBar} from "../appbar/index.jsx";

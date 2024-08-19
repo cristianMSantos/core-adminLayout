@@ -2,7 +2,7 @@ import {Box, Button, DialogContent, TextField, Typography} from "@mui/material";
 import React from "react";
 import {AlertInfo} from "../alert-info/index.jsx";
 import useCustomContext from "../../../../../context/useCustomContext/index.jsx";
-import {AnamneseContext} from "../../../../../context/index.js";
+import {AnamneseContext} from "../../../../../context/index.jsx";
 
 export const InitialState = () => {
     const {

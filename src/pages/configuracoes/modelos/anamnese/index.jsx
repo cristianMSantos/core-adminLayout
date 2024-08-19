@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import {a11yProps, RefactorDialog, TabPanel} from "../../../../components";
 import useCustomContext from "../../../../context/useCustomContext/index.jsx";
-import {AnamneseContext} from "../../../../context/index.js";
+import {AnamneseContext} from "../../../../context/index.jsx";
 
 export const ModeloAnamnese = () => {
     const {handleToggleDialog} = useCustomContext(AnamneseContext);

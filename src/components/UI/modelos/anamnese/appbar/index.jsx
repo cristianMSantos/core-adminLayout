@@ -2,7 +2,7 @@ import {AppBar, Button, IconButton, Toolbar, Typography} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close.js";
 import React from "react";
 import useCustomContext from "../../../../../context/useCustomContext/index.jsx";
-import {AnamneseContext} from "../../../../../context/index.js";
+import {AnamneseContext} from "../../../../../context/index.jsx";
 
 export const AnamneseAppBar = () => {
     const {
