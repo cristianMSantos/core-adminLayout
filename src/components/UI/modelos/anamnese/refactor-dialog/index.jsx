@@ -1,5 +1,5 @@
 import useCustomContext from "../../../../../context/useCustomContext/index.jsx";
-import {AnamneseContext} from "../../../../../context/index.js";
+import {AnamneseContext} from "../../../../../context/index.jsx";
 import React from "react";
 import {SurveyCreatorWidget} from "../../../../survey/index.jsx";
 
