@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { CoreLayout } from "../../layout/core-layout";
 import { Home, Login, Agenda, Financeiro, Relatorio, MyClinica, ClientesCreate } from "../../pages";
 import { AnamneseContainer } from "../../pages/configuracoes/modelos/anamnese/container.jsx"
+import {Cadastro} from "../../pages/cadastro/index.jsx";
 export const generateRoutes = (isAuthenticated) => [
     {
         path: "/",
@@ -30,5 +31,9 @@ export const generateRoutes = (isAuthenticated) => [
     {
         path: "login",
         element: isAuthenticated ? <Navigate to="/" /> : <Login />,
+    },
+    {
+        path: "/cadastro",
+        element: isAuthenticated ? <Navigate to="/" /> : <Cadastro />,
     },
 ];

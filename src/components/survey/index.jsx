@@ -9,6 +9,9 @@ import "survey-core/survey.i18n.js";
 import "survey-creator-core/i18n/portuguese";
 import api from "../../axios.js";
 
+import { Survey } from "survey-react";
+import "survey-react/survey.css";
+
 import {editorLocalization} from "survey-creator-core";
 import {Alert} from "@mui/material";
 
@@ -27,7 +30,18 @@ const creatorOptions = {
 
 const defaultJson = {
     title: "Nome do Grupo",
-    pages: []
+    "pages": [
+    {
+        "name": "página1",
+        "elements": [
+            {
+                "type": "text",
+                "name": "pergunta1"
+            }
+        ]
+    }
+]
+
 };
 
 const clearOldLocalStorageEntries = (currentTitle) => {
@@ -105,7 +119,9 @@ export function SurveyCreatorWidget() {
         <div>
             {error && <Alert severity={"error"}>{error}</Alert>}
             {creator && (
+                <>
                 <SurveyCreatorComponent creator={creator}/>
+                </>
             )}
         </div>
     );

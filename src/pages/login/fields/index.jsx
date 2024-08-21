@@ -1,9 +1,20 @@
-import { Box, Grid, IconButton, InputAdornment, TextField, ThemeProvider, Typography, createTheme } from "@mui/material"
+import {
+    Box,
+    Grid,
+    IconButton,
+    InputAdornment,
+    TextField,
+    ThemeProvider,
+    Typography,
+    createTheme,
+    Button, Link
+} from "@mui/material"
 import { useContext } from "react";
 import { LoginContext } from "../../../context/login";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import '../login.css'
 import { LoadingButton } from "@mui/lab";
+import {useNavigate} from "react-router-dom";
 
 export const LoginContainer = () => {
     const {
@@ -17,7 +28,7 @@ export const LoginContainer = () => {
         handleMouseDownPassword,
         loading
     } = useContext(LoginContext)
-
+    const navigate = useNavigate();
     const LightTheme = createTheme({
         palette: {
             mode: 'light',
@@ -26,6 +37,11 @@ export const LoginContainer = () => {
             },
         },
     });
+
+    const handleLinkClick = (event) => {
+        event.preventDefault(); // Previne o comportamento padrão da tag anchor
+        navigate('/cadastro');
+    };
     return (
         <Box className="content">
             <Grid container className='grid-container'
@@ -115,6 +131,12 @@ export const LoginContainer = () => {
                                         <LoadingButton className='button-save' loading={loading} type="submit" variant="contained">
                                             {showResetPassword ? 'Salvar' : 'Acessar'}
                                         </LoadingButton>
+                                        <Box sx={{display:"flex", justifyContent:"center"}}>
+                                            <Link href="/cadastro"  onClick={handleLinkClick} target="_blank" rel="noopener">
+                                                Criar uma nova conta
+                                            </Link>
+                                        </Box>
+
                                     </Box>
                                 </Grid>
                             </Grid>
