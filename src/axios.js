@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let api = axios.create({
-    baseURL: 'http://localhost:8000'
+    baseURL: 'https://www.codecase.com.br/api/public/api/'
     // baseURL: 'https://codecase.com.br/django'
 });
 

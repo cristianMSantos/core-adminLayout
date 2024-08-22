@@ -33,7 +33,7 @@ export const Header = () => {
 
     const getUser = async () => {
         const options = {
-            url: `/authentication/me`,
+            url: `/auth/me`,
             method: "GET",
             headers: {
                 // "Access-Control-Allow-Origin": "*",

@@ -50,7 +50,7 @@ const LoginProvider = ({ children }) => {
         const data = new FormData(event.currentTarget);
 
         const options = {
-            url: showResetPassword ? `/auth/reset` : `/authentication/login/`,
+            url: showResetPassword ? `/auth/reset` : `/auth/login/`,
             method: 'POST',
             data: {
                 de_nome_usuario: data.get('email'),
@@ -81,7 +81,7 @@ const LoginProvider = ({ children }) => {
                     setLoading(false);
                     setErrorLogin(false);
                     const options = {
-                        url: `/authentication/me/`,
+                        url: `/auth/me/`,
                         method: "GET",
                         headers: {
                             // "Access-Control-Allow-Origin": "*",
