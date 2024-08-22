@@ -56,9 +56,9 @@ const LoginProvider = ({ children }) => {
                 de_nome_usuario: data.get('email'),
                 de_senha: data.get('password'),
             },
-            // headers: {
-            //     'Access-Control-Allow-Origin': '*'
-            // }
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
         }
 
         if (showResetPassword && document.getElementById('password').value === 'plansul123') {
@@ -77,15 +77,15 @@ const LoginProvider = ({ children }) => {
                     setErrorLogin(false);
                     moveLogin()
                 } else {
-                    await dispatch(setLogin(response.data.token));
+                    await dispatch(setLogin(response.data.access_token));
                     setLoading(false);
                     setErrorLogin(false);
                     const options = {
                         url: `/auth/me/`,
-                        method: "GET",
+                        method: "POST",
                         headers: {
-                            // "Access-Control-Allow-Origin": "*",
-                            Authorization: response.data.token ? `Bearer ${response.data.token}` : "",
+                            "Access-Control-Allow-Origin": "*",
+                            Authorization: response.data.access_token ? `Bearer ${response.data.access_token}` : "",
                         },
                     };
                     await api(options)

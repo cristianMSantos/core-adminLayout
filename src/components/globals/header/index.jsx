@@ -34,9 +34,9 @@ export const Header = () => {
     const getUser = async () => {
         const options = {
             url: `/auth/me`,
-            method: "GET",
+            method: "POST",
             headers: {
-                // "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Origin": "*",
                 Authorization: token ? `Bearer ${token}` : "",
             },
         };

@@ -64,7 +64,7 @@ export const LoginContainer = () => {
                                             justifyContent: 'center',
                                             alignItems: 'center'
                                         }}>
-                                            <img src="/images/Logo2.png" width={'100'} height={'100'}  />
+                                            <img src="/psicologia/images/Logo2.png" width={'100'} height={'100'}  />
                                             <Typography
                                                 variant="h5"
                                                 noWrap
