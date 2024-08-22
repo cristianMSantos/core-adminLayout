@@ -64,7 +64,7 @@ export const Sidebar = () => {
                     }}
                 >
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, }} width={'100%'} justifyContent={'center'} alignContent={'center'}>
-                        <img src="/psicologia//images/Logo2.png" width={'45'} height={'45'} />
+                        <img src={window.location.host ==='codecase.com.br' ? "/psicologia/images/Logo2.png" : "/images/Logo2.png"} width={'45'} height={'45'} />
                     </Box>
                     {/* <Box sx={{ display: { xs: 'none', md: 'flex' }, }} width={'100%'} justifyContent={'center'} alignContent={'center'}>
                     <Typography

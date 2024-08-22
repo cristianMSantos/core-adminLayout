@@ -10,12 +10,12 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {LoadingButton} from "@mui/lab";
+import { LoadingButton } from "@mui/lab";
 import React from "react";
 import bg from "../../../assets/clone.png";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const CadastroCard = () =>{
+export const CadastroCard = () => {
     const navigate = useNavigate();
     const [age, setAge] = React.useState('');
 
@@ -23,11 +23,11 @@ export const CadastroCard = () =>{
         setAge(event.target.value);
     };
 
-    const goToLogin = (event) =>{
+    const goToLogin = (event) => {
         event.preventDefault();
         navigate("/login")
     }
-    return(
+    return (
         <Card sx={style.card}>
             <CardContent>
                 <Box sx={{
@@ -35,9 +35,9 @@ export const CadastroCard = () =>{
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginBottom:"1.5rem"
+                    marginBottom: "1.5rem"
                 }}>
-                    <img src="/psicologia/images/Logo2.png" width={'100'} height={'100'}  />
+                    <img src={window.location.host === 'codecase.com.br' ? "/psicologia/images/Logo2.png" : "/images/Logo2.png"} width={'100'} height={'100'} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -56,13 +56,13 @@ export const CadastroCard = () =>{
                 </Box>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
-                        <TextField placeholder={"Digite aqui"} label={"Nome Completo"} fullWidth type={"text"}/>
+                        <TextField placeholder={"Digite aqui"} label={"Nome Completo"} fullWidth type={"text"} />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField placeholder={"Digite aqui"} label={"Email"} fullWidth type="email"/>
+                        <TextField placeholder={"Digite aqui"} label={"Email"} fullWidth type="email" />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField placeholder={"Digite aqui"} label={"Telefone/Celular:"} fullWidth type="tel"/>
+                        <TextField placeholder={"Digite aqui"} label={"Telefone/Celular:"} fullWidth type="tel" />
                     </Grid>
                     <Grid item xs={12}>
                         {/* eslint-disable-next-line react/jsx-no-undef */}
@@ -82,7 +82,7 @@ export const CadastroCard = () =>{
                     <Grid item xs={12}>
                         <LoadingButton variant={"contained"} fullWidth size={"large"} loading={false} className={"button-save"}>Próximo</LoadingButton>
                     </Grid>
-                    <Grid item xs={12} sx={{textAlign:"center"}}>
+                    <Grid item xs={12} sx={{ textAlign: "center" }}>
                         <Typography>
                             Ao informar meus dados, eu concordo com a {" "}
                             <Link href="https://example.com/politica-de-privacidade">Política de Privacidade</Link> {" "}
@@ -91,7 +91,7 @@ export const CadastroCard = () =>{
                             do PsicoManager.
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} sx={{textAlign:"center"}}>
+                    <Grid item xs={12} sx={{ textAlign: "center" }}>
                         <Typography>
                             Já possui uma conta? <Link onClick={goToLogin}>Fazer Login</Link>
                         </Typography>
@@ -103,7 +103,7 @@ export const CadastroCard = () =>{
 }
 
 const style = {
-    container:{
+    container: {
         width: "100vw",
         height: "100vh",
         backgroundImage: `url(${bg})`,
@@ -111,7 +111,7 @@ const style = {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
     },
-    card:{
+    card: {
         height: "100%"
     }
 }
