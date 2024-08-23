@@ -8,9 +8,9 @@ export const login = createSlice({
     },
     reducers: {
         setLogin: (state, action) => {
-            localStorage.setItem('token', action.payload);
+            localStorage.setItem('token', action.payload.access_token);
+            localStorage.setItem("refreshToken", action.payload.refresh_token);
             state.isAuthenticated = localStorage.getItem('token');
-
         },
         setLogout: (state) => {
             state.user = null

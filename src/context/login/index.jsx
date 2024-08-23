@@ -77,7 +77,7 @@ const LoginProvider = ({ children }) => {
                     setErrorLogin(false);
                     moveLogin()
                 } else {
-                    await dispatch(setLogin(response.data.access_token));
+                    await dispatch(setLogin(response.data));
                     setLoading(false);
                     setErrorLogin(false);
                     const options = {
