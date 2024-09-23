@@ -78,7 +78,7 @@ export const LoginContainer = () => {
                                                     textDecoration: 'none',
                                                 }}
                                             >
-                                                PSYCHOLOGY
+                                                EXAMPLE
                                             </Typography>
                                         </Box>
                                         <TextField
