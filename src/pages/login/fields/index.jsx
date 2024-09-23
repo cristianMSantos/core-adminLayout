@@ -9,12 +9,12 @@ import {
     createTheme,
     Button, Link
 } from "@mui/material"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { LoginContext } from "../../../context/login";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import '../login.css'
 import { LoadingButton } from "@mui/lab";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const LoginContainer = () => {
     const {
@@ -26,7 +26,8 @@ export const LoginContainer = () => {
         handleSubmit,
         handleClickShowPassword,
         handleMouseDownPassword,
-        loading
+        loading,
+        errorLogin
     } = useContext(LoginContext)
     const navigate = useNavigate();
     const LightTheme = createTheme({
@@ -38,6 +39,9 @@ export const LoginContainer = () => {
         },
     });
 
+    useEffect(() => {
+        console.log(errorLogin)
+    }, [errorLogin])
     const handleLinkClick = (event) => {
         event.preventDefault(); // Previne o comportamento padrão da tag anchor
         navigate('/cadastro');
@@ -64,7 +68,7 @@ export const LoginContainer = () => {
                                             justifyContent: 'center',
                                             alignItems: 'center'
                                         }}>
-                                            <img src={window.location.host ==='codecase.com.br' ? "/psicologia/images/Logo2.png" : "/images/Logo2.png"} width={'100'} height={'100'}  />
+                                            <img src={window.location.host === 'codecase.com.br' ? "/psicologia/images/Logo2.png" : "/images/Logo2.png"} width={'100'} height={'100'} />
                                             <Typography
                                                 variant="h5"
                                                 noWrap
@@ -128,11 +132,17 @@ export const LoginContainer = () => {
                                                 },
                                             }}
                                         />
+                                        {
+                                            errorLogin ?
+                                                <p className='errorLogin'>
+                                                    Usuário ou Senha Incorreto!
+                                                </p> : false
+                                        }
                                         <LoadingButton className='button-save' loading={loading} type="submit" variant="contained">
                                             {showResetPassword ? 'Salvar' : 'Acessar'}
                                         </LoadingButton>
-                                        <Box sx={{display:"flex", justifyContent:"center"}}>
-                                            <Link href="/cadastro"  onClick={handleLinkClick} target="_blank" rel="noopener">
+                                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                                            <Link href="/cadastro" onClick={handleLinkClick} target="_blank" rel="noopener">
                                                 Criar uma nova conta
                                             </Link>
                                         </Box>

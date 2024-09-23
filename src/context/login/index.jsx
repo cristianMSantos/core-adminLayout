@@ -102,6 +102,10 @@ const LoginProvider = ({ children }) => {
 
             })
             .catch((error) => {
+                if (!error.response) {
+                    setErrorLogin(true);
+                    setLoading(false);
+                }
                 if (error.response.status === 401) {
                     setLoading(false);
                     setErrorLogin(true);
@@ -197,7 +201,8 @@ const LoginProvider = ({ children }) => {
                 handleSubmit,
                 handleClickShowPassword,
                 handleMouseDownPassword,
-                loading
+                loading,
+                errorLogin
             }}
         >
             {children}
