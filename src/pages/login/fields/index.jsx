@@ -132,6 +132,9 @@ export const LoginContainer = () => {
                                                 },
                                             }}
                                         />
+                                        <p className='teste'>
+                                            Usuário e Senha Teste é 'admin'
+                                        </p>
                                         {
                                             errorLogin ?
                                                 <p className='errorLogin'>
