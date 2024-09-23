@@ -55,7 +55,7 @@ function App() {
     response => response,
     async error => {
       const { response } = error;
-      if (response && response.status === 401) {
+      if (response && response.status === 401 && !originalRequest.url.includes('/login')) {
         // Tenta refresh token
         try {
           const token = await refreshToken();
