@@ -11,6 +11,7 @@ export const Pessoais = () => {
         formCreate,
         setFormCreate,
         optionsGrupo,
+        optionsNacionalidade,
         handleAddOptions,
         loadingAddGrupo
     } = useCustomContext(ClientesContext)
@@ -18,7 +19,7 @@ export const Pessoais = () => {
         <>
             <Box component="form" onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <TextField
                             variant="outlined"
                             label={formCreate.pessoais.nomeSocial ? "Nome Social" : "Nome"}
@@ -55,7 +56,7 @@ export const Pessoais = () => {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Autocomplete
                             freeSolo
                             options={optionsGrupo}
@@ -115,6 +116,31 @@ export const Pessoais = () => {
                                     setNewGrupoOpenDialog(true);
                                 }
                             }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Autocomplete
+                            freeSolo
+                            options={optionsNacionalidade}
+                            value={formCreate.pessoais.nacionalidade}
+                            loading={loadingAddGrupo}
+                            loadingText={`Carregando a nacionalidade ${formCreate.pessoais.nacionalidade} ...`}
+                            onInputChange={(event, newInputValue) => setFormCreate((prev) => ({
+                                ...prev,
+                                pessoais: {
+                                    ...prev.pessoais,
+                                    nacionalidade: newInputValue
+                                }
+                            }))}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    placeholder="Selecione a Nacionalidade"
+                                    size="small"
+                                    label="Nacionalidade"
+                                    variant="outlined"
+                                />
+                            )}
                         />
                     </Grid>
                 </Grid>

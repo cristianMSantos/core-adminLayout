@@ -61,7 +61,7 @@ const LoginProvider = ({ children }) => {
             }
         }
 
-        if (showResetPassword && document.getElementById('password').value === 'plansul123') {
+        if (showResetPassword && document.getElementById('password').value === 'admin') {
             setError({ ...error, ['senha']: true });
             setMessageError({ ...messageError, ['senha']: 'A senha não pode ser a padrão!' });
             return

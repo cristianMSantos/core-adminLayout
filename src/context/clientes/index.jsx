@@ -5,13 +5,15 @@ export const ClientesContext = createContext(null);
 const ClientesProvider = ({ children }) => {
     const [createTab, setCreateTab] = useState("0");
     const [optionsGrupo, setOptionsGrupo] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [optionsNacionalidade, setNacionalidade] = useState(['Option 1', 'Option 2', 'Option 3']);
     const [loadingAddGrupo, setLoadingAddGrupo] = useState(false)
 
     const [formCreate, setFormCreate] = useState({
         pessoais: {
             nome: '',
             nomeSocial: false,
-            grupo: ''
+            grupo: '',
+            nacionalidade: ''
         }
     })
 
@@ -57,6 +59,8 @@ const ClientesProvider = ({ children }) => {
                 setFormCreate,
                 setOptionsGrupo,
                 optionsGrupo,
+                optionsNacionalidade,
+                setNacionalidade,
                 handleAddOptions,
                 loadingAddGrupo
             }}

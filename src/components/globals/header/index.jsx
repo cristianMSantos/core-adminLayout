@@ -137,7 +137,12 @@ export const Header = () => {
                             <IconButton
                                 onClick={handleClickMenuAvatar}
                                 size="small"
-                                sx={{ ml: 2 }}
+                                sx={{
+                                    ml: 2,
+                                    '&:focus': {
+                                        outline: 'none',
+                                    },
+                                }}
                                 aria-controls={openMenuAvatar ? 'account-menu' : undefined}
                                 aria-haspopup="true"
                                 aria-expanded={openMenuAvatar ? 'true' : undefined}
@@ -154,7 +159,7 @@ export const Header = () => {
                                         textTransform: "capitalize",
                                         color: theme.palette.primary.contrastText
                                     }}>
-                                    {user ? `${firstName} ${lastName}` : ""}
+                                    {user ? `${firstName}` : ""}
                                 </Typography>
 
                             </IconButton>
